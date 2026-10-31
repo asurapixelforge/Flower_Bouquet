@@ -1,0 +1,1295 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset=utf8>
+  <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <style>
+    :root {
+      color-scheme: light;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font: 14px -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fff;
+      color: #000
+    }
+
+    img {
+      max-width: 100%
+    }
+
+    [hidden]:not([hidden=until-found i]) {
+      display: none !important
+    }
+  </style>
+</head>
+
+<body>
+  <!-- layout: full-bleed night canvas; a grand floral bouquet in solid-fill ASCII text-grid art style, featuring white peony, lavender aster, blush coral rose, golden ranunculus, plum blossoms, leaves, kraft wrap, and an animated fluttering bow -->
+  <title>Bouquet of Blooms</title>
+  <style>
+    :root {
+      --void: #000000;
+      --star: #9aa08f;
+      --stem: #4e6e3c;
+
+      /* White Peony */
+      --wp-o: #f3e6d8;
+      --wp-m: #fdf7f0;
+      --wp-i: #ffffff;
+      --wp-st: #e7bd6a;
+      --wp-sg: #fff4da;
+
+      /* Lavender Aster */
+      --la-o: #9a76de;
+      --la-i: #c7a8f8;
+      --la-st: #ffd56b;
+
+      /* Blush Coral Rose */
+      --bp-o: #d97585;
+      --bp-m: #f29faa;
+      --bp-i: #fde4e7;
+      --bp-st: #f7b76d;
+
+      /* Golden Ranunculus / Buttercup */
+      --gb-o: #da8e3e;
+      --gb-m: #f5b75f;
+      --gb-i: #ffe596;
+      --gb-st: #6f471e;
+
+      /* Plum Blossom */
+      --pb-o: #85264e;
+      --pb-i: #bd4374;
+      --pb-st: #f8c77b;
+
+      /* Sprigs & Florets */
+      --fl-f: #e5edf5;
+      --fl-c: #ffd976;
+
+      /* Leaves & Foliage */
+      --lf-b: #2a4724;
+      --lf-m: #416637;
+      --lf-f: #5b8c4e;
+      --lf-v: #86b976;
+
+      /* Kraft Paper Wrap */
+      --wr-b: #6e5236;
+      --wr-m: #926f49;
+      --wr-h: #ba9367;
+      --wr-l: #483522;
+
+      /* Ribbon & Bow */
+      --rb-k: #db596e;
+      --rb-l: #eb7487;
+      --rb-t: #c34559;
+      --rb-h: #ffd2da;
+
+      /* Luminous Pollen */
+      --pollen: #ffe694;
+
+      color-scheme: dark;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--void);
+      overflow: hidden;
+    }
+
+    body {
+      position: relative;
+      user-select: none;
+    }
+
+    .sky {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      background: var(--star);
+      border-radius: 50%;
+      opacity: 0.25;
+      animation: twinkle linear infinite;
+    }
+
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        opacity: 0.08;
+      }
+
+      50% {
+        opacity: 0.55;
+      }
+    }
+
+    .anchor {
+      position: absolute;
+      left: 50%;
+      bottom: 3.5vh;
+      transform: translateX(-50%);
+      transform-origin: 50% 90%;
+      will-change: transform;
+      cursor: pointer;
+    }
+
+    pre#bloom {
+      margin: 0;
+      font-family: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+      line-height: 0.95;
+      white-space: pre;
+      letter-spacing: 0;
+    }
+
+    /* Stem */
+    .tb {
+      color: var(--stem);
+    }
+
+    /* White Peony */
+    .wp-o {
+      color: var(--wp-o);
+    }
+
+    .wp-m {
+      color: var(--wp-m);
+      text-shadow: 0 0 2px rgba(255, 255, 255, 0.25);
+    }
+
+    .wp-i {
+      color: var(--wp-i);
+      text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+    }
+
+    .wp-st {
+      color: var(--wp-st);
+      text-shadow: 0 0 3px rgba(231, 189, 106, 0.4);
+    }
+
+    .wp-sg {
+      color: var(--wp-sg);
+      font-weight: 700;
+      text-shadow: 0 0 9px rgba(255, 244, 218, 0.8);
+    }
+
+    .wp-o.hot {
+      color: #fffaf3;
+      text-shadow: 0 0 6px rgba(255, 250, 243, 0.6);
+    }
+
+    .wp-m.hot {
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.75);
+    }
+
+    .wp-i.hot {
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.95);
+    }
+
+    .wp-st.hot {
+      color: #ffd48a;
+      text-shadow: 0 0 9px rgba(255, 212, 138, 0.9);
+    }
+
+    /* Lavender Aster */
+    .la-o {
+      color: var(--la-o);
+      text-shadow: 0 0 2px rgba(154, 118, 222, 0.3);
+    }
+
+    .la-i {
+      color: var(--la-i);
+      text-shadow: 0 0 4px rgba(199, 168, 248, 0.45);
+    }
+
+    .la-st {
+      color: var(--la-st);
+      font-weight: 700;
+      text-shadow: 0 0 5px rgba(255, 213, 107, 0.6);
+    }
+
+    .la-o.hot {
+      color: #bb9af8;
+      text-shadow: 0 0 8px rgba(187, 154, 248, 0.8);
+    }
+
+    .la-i.hot {
+      color: #f0e6ff;
+      text-shadow: 0 0 11px rgba(240, 230, 255, 0.95);
+    }
+
+    .la-st.hot {
+      color: #fff2b0;
+      text-shadow: 0 0 9px rgba(255, 242, 176, 0.9);
+    }
+
+    /* Blush Coral Rose */
+    .bp-o {
+      color: var(--bp-o);
+      text-shadow: 0 0 2px rgba(217, 117, 133, 0.3);
+    }
+
+    .bp-m {
+      color: var(--bp-m);
+      text-shadow: 0 0 4px rgba(242, 159, 170, 0.4);
+    }
+
+    .bp-i {
+      color: var(--bp-i);
+      text-shadow: 0 0 5px rgba(253, 228, 231, 0.5);
+    }
+
+    .bp-st {
+      color: var(--bp-st);
+      text-shadow: 0 0 3px rgba(247, 183, 109, 0.5);
+    }
+
+    .bp-o.hot {
+      color: #ff98a7;
+      text-shadow: 0 0 8px rgba(255, 152, 167, 0.7);
+    }
+
+    .bp-m.hot {
+      color: #ffcbd2;
+      text-shadow: 0 0 10px rgba(255, 203, 210, 0.85);
+    }
+
+    .bp-i.hot {
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.95);
+    }
+
+    .bp-st.hot {
+      color: #ffd699;
+      text-shadow: 0 0 8px rgba(255, 214, 153, 0.9);
+    }
+
+    /* Golden Ranunculus */
+    .gb-o {
+      color: var(--gb-o);
+      text-shadow: 0 0 2px rgba(218, 142, 62, 0.3);
+    }
+
+    .gb-m {
+      color: var(--gb-m);
+      text-shadow: 0 0 4px rgba(245, 183, 95, 0.4);
+    }
+
+    .gb-i {
+      color: var(--gb-i);
+      text-shadow: 0 0 5px rgba(255, 229, 150, 0.5);
+    }
+
+    .gb-st {
+      color: var(--gb-st);
+    }
+
+    .gb-o.hot {
+      color: #ffb15c;
+      text-shadow: 0 0 7px rgba(255, 177, 92, 0.7);
+    }
+
+    .gb-m.hot {
+      color: #ffd584;
+      text-shadow: 0 0 9px rgba(255, 213, 132, 0.85);
+    }
+
+    .gb-i.hot {
+      color: #fffae0;
+      text-shadow: 0 0 12px rgba(255, 250, 224, 0.95);
+    }
+
+    /* Plum Blossom */
+    .pb-o {
+      color: var(--pb-o);
+      text-shadow: 0 0 2px rgba(133, 38, 78, 0.3);
+    }
+
+    .pb-i {
+      color: var(--pb-i);
+      text-shadow: 0 0 4px rgba(189, 67, 116, 0.4);
+    }
+
+    .pb-st {
+      color: var(--pb-st);
+      text-shadow: 0 0 3px rgba(248, 199, 123, 0.5);
+    }
+
+    .pb-o.hot {
+      color: #b83d72;
+      text-shadow: 0 0 7px rgba(184, 61, 114, 0.7);
+    }
+
+    .pb-i.hot {
+      color: #ea6fa2;
+      text-shadow: 0 0 9px rgba(234, 111, 162, 0.85);
+    }
+
+    .pb-st.hot {
+      color: #ffdfa3;
+      text-shadow: 0 0 8px rgba(255, 223, 163, 0.9);
+    }
+
+    /* Sprigs */
+    .fl-f {
+      color: var(--fl-f);
+      text-shadow: 0 0 3px rgba(229, 237, 245, 0.4);
+    }
+
+    .fl-c {
+      color: var(--fl-c);
+      text-shadow: 0 0 4px rgba(255, 217, 118, 0.6);
+    }
+
+    .fl-f.hot {
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
+    }
+
+    /* Leaves & Foliage */
+    .lf-b {
+      color: var(--lf-b);
+    }
+
+    .lf-m {
+      color: var(--lf-m);
+    }
+
+    .lf-f {
+      color: var(--lf-f);
+    }
+
+    .lf-v {
+      color: var(--lf-v);
+      font-weight: 600;
+      text-shadow: 0 0 2px rgba(134, 185, 118, 0.3);
+    }
+
+    /* Kraft Wrap */
+    .wr-b {
+      color: var(--wr-b);
+    }
+
+    .wr-m {
+      color: var(--wr-m);
+    }
+
+    .wr-h {
+      color: var(--wr-h);
+    }
+
+    .wr-l {
+      color: var(--wr-l);
+      font-weight: 700;
+    }
+
+    /* Ribbon & Bow */
+    .rb-k {
+      color: var(--rb-k);
+      font-weight: 700;
+      text-shadow: 0 0 3px rgba(219, 89, 110, 0.5);
+    }
+
+    .rb-l {
+      color: var(--rb-l);
+      text-shadow: 0 0 4px rgba(235, 116, 135, 0.5);
+    }
+
+    .rb-t {
+      color: var(--rb-t);
+      text-shadow: 0 0 3px rgba(195, 69, 89, 0.4);
+    }
+
+    .rb-h {
+      color: var(--rb-h);
+      text-shadow: 0 0 6px rgba(255, 210, 218, 0.7);
+    }
+
+    .rb-l.hot,
+    .rb-k.hot {
+      color: #ff9fb0;
+      text-shadow: 0 0 9px rgba(255, 159, 176, 0.9);
+    }
+
+    .rb-t.hot {
+      color: #ea5d75;
+      text-shadow: 0 0 8px rgba(234, 93, 117, 0.8);
+    }
+
+    /* Luminous Pollen */
+    .pol {
+      color: var(--pollen);
+      font-weight: 700;
+      text-shadow: 0 0 8px rgba(255, 230, 148, 0.9);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .star {
+        animation: none;
+        opacity: 0.3;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
+
+  <div class="sky" id="sky"></div>
+  <div class="anchor" id="anchor">
+    <pre id="bloom"></pre>
+  </div>
+
+  <script>
+    (function () {
+      // ---------- starfield ----------
+      var sky = document.getElementById('sky');
+      for (var i = 0; i < 95; i++) {
+        var d = document.createElement('div');
+        d.className = 'star';
+        var size = Math.random() * 1.6 + 0.6;
+        d.style.width = size + 'px';
+        d.style.height = size + 'px';
+        d.style.left = (Math.random() * 100) + '%';
+        d.style.top = (Math.random() * 85) + '%';
+        d.style.animationDuration = (3 + Math.random() * 5) + 's';
+        d.style.animationDelay = (Math.random() * 5) + 's';
+        sky.appendChild(d);
+      }
+
+      // ---------- grid geometry ----------
+      var COLS = 184, ROWS = 100;
+      var ASPECT = 0.52; // compresses vertical monospace steps so geometry reads circular
+      var GATHER_X = 92, GATHER_Y = 73;
+
+      function seeded(n) {
+        var x = Math.sin(n * 12.9898 + 4.1414) * 43758.5453;
+        return x - Math.floor(x);
+      }
+      function dirChar(dx, dy) {
+        var adx = Math.abs(dx), ady = Math.abs(dy);
+        if (ady < 0.4 * adx) return '-';
+        if (adx < 0.4 * ady) return '|';
+        return ((dx > 0 && dy > 0) || (dx < 0 && dy < 0)) ? '\\' : '/';
+      }
+      function angleDiff(a, b) { return ((a - b + 540) % 360) - 180; }
+
+      function makeGrid() {
+        var g = new Array(ROWS);
+        for (var r = 0; r < ROWS; r++) g[r] = new Array(COLS).fill(null);
+        return g;
+      }
+      function plot(g, col, row, ch, cls) {
+        col = Math.round(col); row = Math.round(row);
+        if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return;
+        g[row][col] = { ch: ch, cls: cls };
+      }
+
+      // ---------- solid-fill petal painter (cupped rounded lobe with soft fading boundary) ----------
+      function paintPetal(g, cx, cy, angle, length, widthDeg, bend, cls, roundness) {
+        var halfW = widthDeg / 2;
+        var bendStart = length * 0.58, bendSpan = length * 0.42;
+        var padR = length * 1.08;
+        var pts = [
+          [angle, padR], [angle - halfW, padR], [angle + halfW, padR],
+          [angle - halfW + bend, padR * 1.05], [angle + halfW + bend, padR * 1.05], [angle + bend, padR * 1.05]
+        ];
+        var minC = cx, maxC = cx, minR = cy, maxR = cy;
+        for (var p = 0; p < pts.length; p++) {
+          var a = pts[p][0] * Math.PI / 180;
+          var x = cx + Math.cos(a) * pts[p][1];
+          var y = cy - Math.sin(a) * ASPECT * pts[p][1];
+          if (x < minC) minC = x; if (x > maxC) maxC = x;
+          if (y < minR) minR = y; if (y > maxR) maxR = y;
+        }
+        var c0 = Math.max(0, Math.floor(minC) - 1), c1 = Math.min(COLS - 1, Math.ceil(maxC) + 1);
+        var r0 = Math.max(0, Math.floor(minR) - 1), r1 = Math.min(ROWS - 1, Math.ceil(maxR) + 1);
+        var pow = roundness || 1;
+
+        for (var row = r0; row <= r1; row++) {
+          for (var col = c0; col <= c1; col++) {
+            var dx = col - cx, dy = row - cy;
+            if (dx === 0 && dy === 0) continue;
+            var dyMath = -dy / ASPECT;
+            var r = Math.sqrt(dx * dx + dyMath * dyMath);
+            if (r > length * 1.1) continue;
+            var ang = Math.atan2(dyMath, dx) * 180 / Math.PI;
+            var eff = angle;
+            if (bend && r > bendStart) {
+              eff = angle + bend * Math.min(1, (r - bendStart) / bendSpan);
+            }
+            var aoff = Math.abs(angleDiff(ang, eff));
+            if (aoff > halfW) continue;
+            var taperT = Math.pow(aoff / halfW, pow);
+            var boundary = length * (0.55 + 0.45 * Math.cos(taperT * Math.PI / 2));
+            if (r > boundary) continue;
+            var nearRim = r / boundary;
+            var ch;
+            if (nearRim > 0.92) ch = '.';
+            else if (nearRim > 0.8) ch = (seeded(row * 311 + col) > 0.35) ? dirChar(dx, dy) : ',';
+            else ch = dirChar(dx, dy);
+            plot(g, col, row, ch, cls);
+          }
+        }
+      }
+
+      // ---------- needle petal painter for Aster/Dahlia ----------
+      function paintNeedlePetal(g, cx, cy, angle, length, widthDeg, bend, cls) {
+        var halfW = Math.max(1.8, widthDeg / 2);
+        var padR = length * 1.06;
+        var rad = angle * Math.PI / 180;
+        var radB = (angle + bend) * Math.PI / 180;
+        var x1 = cx + Math.cos(rad) * padR, y1 = cy - Math.sin(rad) * ASPECT * padR;
+        var x2 = cx + Math.cos(radB) * padR, y2 = cy - Math.sin(radB) * ASPECT * padR;
+        var minC = Math.max(0, Math.floor(Math.min(cx, x1, x2) - halfW) - 1);
+        var maxC = Math.min(COLS - 1, Math.ceil(Math.max(cx, x1, x2) + halfW) + 1);
+        var minR = Math.max(0, Math.floor(Math.min(cy, y1, y2) - halfW * ASPECT) - 1);
+        var maxR = Math.min(ROWS - 1, Math.ceil(Math.max(cy, y1, y2) + halfW * ASPECT) + 1);
+
+        for (var row = minR; row <= maxR; row++) {
+          for (var col = minC; col <= maxC; col++) {
+            var dx = col - cx, dy = row - cy;
+            if (dx === 0 && dy === 0) continue;
+            var dyMath = -dy / ASPECT;
+            var r = Math.sqrt(dx * dx + dyMath * dyMath);
+            if (r > length * 1.06) continue;
+            var ang = Math.atan2(dyMath, dx) * 180 / Math.PI;
+            var eff = angle + (bend ? bend * (r / length) : 0);
+            var aoff = Math.abs(angleDiff(ang, eff));
+            if (aoff > halfW) continue;
+            var taperT = aoff / halfW;
+            var boundary = length * Math.cos(taperT * Math.PI / 2);
+            if (r > boundary) continue;
+            var ch = (r / boundary > 0.88) ? '.' : dirChar(dx, dy);
+            plot(g, col, row, ch, cls);
+          }
+        }
+      }
+
+      // ---------- stamen painter ----------
+      function strokeStamen(g, cx, cy, angle, length, cls) {
+        var a = angle * Math.PI / 180;
+        var dx = Math.cos(a), dy = -Math.sin(a) * ASPECT;
+        var steps = Math.max(1, Math.round(length));
+        var ch = dirChar(dx, dy);
+        var x = cx, y = cy;
+        var nlen = Math.sqrt(dx * dx + dy * dy) || 1, nx = -dy / nlen, ny = dx / nlen;
+        for (var s = 1; s <= steps; s++) {
+          x += dx; y += dy;
+          var tip = (s === steps);
+          plot(g, x, y, tip ? 'o' : ch, cls);
+          if (s < steps * 0.4) plot(g, x + nx * 0.6, y + ny * 0.6, ch, cls);
+        }
+      }
+
+      // ---------- botanical leaf painter ----------
+      function paintLeaf(g, x0, y0, angleDeg, length, width, cls, ribCls, curvature) {
+        var a = angleDeg * Math.PI / 180;
+        var cosA = Math.cos(a), sinA = -Math.sin(a) * ASPECT;
+        var curv = curvature || 0;
+        var steps = Math.round(length);
+
+        for (var s = 1; s <= steps; s++) {
+          var t = s / steps;
+          var spineX = x0 + cosA * s - sinA * curv * Math.sin(t * Math.PI) * s * 0.4;
+          var spineY = y0 + sinA * s + cosA * curv * Math.sin(t * Math.PI) * s * 0.4;
+          var w = width * Math.sin(t * Math.PI) * (1 - 0.2 * t);
+          var nx = -sinA / (ASPECT || 1), ny = cosA * ASPECT;
+          var nLen = Math.sqrt(nx * nx + ny * ny) || 1;
+          nx /= nLen; ny /= nLen;
+
+          var span = Math.round(w);
+          for (var d = -span; d <= span; d++) {
+            var lx = spineX + nx * d;
+            var ly = spineY + ny * d;
+            var rel = Math.abs(d) / (span || 1);
+            var ch;
+            if (d === 0) {
+              ch = dirChar(cosA, sinA);
+              plot(g, lx, ly, ch, ribCls || cls);
+            } else if (rel > 0.85) {
+              ch = '.';
+              plot(g, lx, ly, ch, cls);
+            } else {
+              ch = (d > 0) ? '/' : '\\';
+              plot(g, lx, ly, ch, cls);
+            }
+          }
+        }
+      }
+
+      // ---------- curved stem drawer ----------
+      function drawStemCurve(g, x0, y0, x1, y1, bendOffset, cls) {
+        var steps = Math.max(10, Math.round(Math.hypot(x1 - x0, (y1 - y0) / ASPECT) * 1.2));
+        var midX = (x0 + x1) / 2 + bendOffset;
+        var midY = (y0 + y1) / 2;
+        for (var i = 0; i <= steps; i++) {
+          var t = i / steps;
+          var inv = 1 - t;
+          var x = inv * inv * x0 + 2 * inv * t * midX + t * t * x1;
+          var y = inv * inv * y0 + 2 * inv * t * midY + t * t * y1;
+          var dx = 2 * inv * (midX - x0) + 2 * t * (x1 - midX);
+          var dy = 2 * inv * (midY - y0) + 2 * t * (y1 - midY);
+          plot(g, x, y, dirChar(dx, dy), cls);
+          if (i % 4 === 0) plot(g, x + 0.6, y, '`', cls);
+        }
+      }
+
+      // ---------- sprig / filler floret painter ----------
+      function drawSprig(g, cx, cy, dirAngle, branches, clsFloret, clsCore, now, mouseInf) {
+        var a = dirAngle * Math.PI / 180;
+        var dx = Math.cos(a), dy = -Math.sin(a) * ASPECT;
+        for (var b = 0; b < branches.length; b++) {
+          var br = branches[b];
+          var bx = cx + dx * br.dist + br.ox;
+          var by = cy + dy * br.dist + br.oy;
+          drawStemCurve(g, cx, cy, bx, by, br.bend || 0, 'tb');
+          var floretCls = (mouseInf > 0.5) ? (clsFloret + ' hot') : clsFloret;
+          var pulse = (Math.sin(now * 0.003 + b * 1.5) > 0.4) ? '*' : '+';
+          plot(g, bx, by, 'o', clsCore);
+          plot(g, bx - 1, by, pulse, floretCls);
+          plot(g, bx + 1, by, pulse, floretCls);
+          plot(g, bx, by - 1, '|', floretCls);
+          plot(g, bx, by + 1, '|', floretCls);
+        }
+      }
+
+      // ---------- BUILD STATIC FLOWER SPECS ONCE AT STARTUP ----------
+      // 1. Central White Peony
+      var WP_SWEEP = 316, WP_START = -68;
+      var wpOuterSpec = [], wpMidSpec = [], wpInnerSpec = [], wpStamenSpec = [];
+      var WP_OUTER = 32, WP_MID = 36, WP_INNER = 34, WP_STAMENS = 68;
+      var WP_OUTER_W = (WP_SWEEP / WP_OUTER) * 2.5;
+      var WP_MID_W = (WP_SWEEP / WP_MID) * 2.5;
+      var WP_INNER_W = (WP_SWEEP / WP_INNER) * 2.4;
+
+      for (var i = 0; i < WP_OUTER; i++) {
+        var t = i / (WP_OUTER - 1);
+        var ang = WP_START + t * WP_SWEEP + (seeded(i) - 0.5) * 3.5;
+        var len = 34 + seeded(i + 100) * 8;
+        var bend = (ang > 90 ? 1 : -1) * (5 + seeded(i + 50) * 4);
+        wpOuterSpec.push({ a: ang, l: len, bend: bend });
+      }
+      for (var m = 0; m < WP_MID; m++) {
+        var tm = m / (WP_MID - 1);
+        var angm = WP_START + 4 + tm * (WP_SWEEP - 8) + (seeded(m + 700) - 0.5) * 3.5;
+        var lenm = 23 + seeded(m + 800) * 7;
+        var bendm = (angm > 90 ? 1 : -1) * (3 + seeded(m + 850) * 3);
+        wpMidSpec.push({ a: angm, l: lenm, bend: bendm });
+      }
+      for (var j = 0; j < WP_INNER; j++) {
+        var tj = j / (WP_INNER - 1);
+        var angj = WP_START + 8 + tj * (WP_SWEEP - 16) + (seeded(j + 200) - 0.5) * 4;
+        var lenj = 13 + seeded(j + 300) * 6;
+        wpInnerSpec.push({ a: angj, l: lenj });
+      }
+      for (var k = 0; k < WP_STAMENS; k++) {
+        var tk = k / (WP_STAMENS - 1);
+        var angk = WP_START + 12 + tk * (WP_SWEEP - 24) + (seeded(k + 400) - 0.5) * 5;
+        var lenk = 5 + seeded(k + 500) * 5;
+        wpStamenSpec.push({ a: angk, l: lenk });
+      }
+
+      // 2. Lavender Aster (Upper-Left)
+      var laOuterSpec = [], laInnerSpec = [], laCoreSpec = [];
+      var LA_OUTER = 44, LA_INNER = 36, LA_CORE = 40;
+      for (var a1 = 0; a1 < LA_OUTER; a1++) {
+        var tA = a1 / LA_OUTER;
+        var angA = -180 + tA * 360 + (seeded(a1 + 10) - 0.5) * 4;
+        var lenA = 21 + seeded(a1 + 110) * 5;
+        var bendA = (seeded(a1 + 220) - 0.5) * 7;
+        laOuterSpec.push({ a: angA, l: lenA, bend: bendA });
+      }
+      for (var a2 = 0; a2 < LA_INNER; a2++) {
+        var tA2 = a2 / LA_INNER;
+        var angA2 = -180 + tA2 * 360 + 4 + (seeded(a2 + 30) - 0.5) * 4;
+        var lenA2 = 13 + seeded(a2 + 130) * 4;
+        laInnerSpec.push({ a: angA2, l: lenA2 });
+      }
+      for (var a3 = 0; a3 < LA_CORE; a3++) {
+        var tA3 = a3 / LA_CORE;
+        var angA3 = -180 + tA3 * 360 + (seeded(a3 + 50) - 0.5) * 6;
+        var lenA3 = 3.5 + seeded(a3 + 150) * 3;
+        laCoreSpec.push({ a: angA3, l: lenA3 });
+      }
+
+      // 3. Blush Coral Rose (Upper-Right)
+      var bpOuterSpec = [], bpMidSpec = [], bpInnerSpec = [], bpStamenSpec = [];
+      var BP_SWEEP = 310, BP_START = -65;
+      var BP_OUTER = 26, BP_MID = 28, BP_INNER = 24, BP_STAMENS = 46;
+      var BP_OUTER_W = (BP_SWEEP / BP_OUTER) * 2.5;
+      var BP_MID_W = (BP_SWEEP / BP_MID) * 2.5;
+      var BP_INNER_W = (BP_SWEEP / BP_INNER) * 2.4;
+
+      for (var b1 = 0; b1 < BP_OUTER; b1++) {
+        var tb1 = b1 / (BP_OUTER - 1);
+        var angB = BP_START + tb1 * BP_SWEEP + (seeded(b1 + 300) - 0.5) * 4;
+        var lenB = 25 + seeded(b1 + 400) * 6;
+        var bendB = (angB > 90 ? 1 : -1) * (4 + seeded(b1 + 500) * 4);
+        bpOuterSpec.push({ a: angB, l: lenB, bend: bendB });
+      }
+      for (var b2 = 0; b2 < BP_MID; b2++) {
+        var tb2 = b2 / (BP_MID - 1);
+        var angB2 = BP_START + 4 + tb2 * (BP_SWEEP - 8) + (seeded(b2 + 600) - 0.5) * 4;
+        var lenB2 = 17 + seeded(b2 + 700) * 5;
+        var bendB2 = (angB2 > 90 ? 1 : -1) * (2 + seeded(b2 + 800) * 3);
+        bpMidSpec.push({ a: angB2, l: lenB2, bend: bendB2 });
+      }
+      for (var b3 = 0; b3 < BP_INNER; b3++) {
+        var tb3 = b3 / (BP_INNER - 1);
+        var angB3 = BP_START + 8 + tb3 * (BP_SWEEP - 16) + (seeded(b3 + 900) - 0.5) * 4;
+        var lenB3 = 10 + seeded(b3 + 950) * 4;
+        bpInnerSpec.push({ a: angB3, l: lenB3 });
+      }
+      for (var b4 = 0; b4 < BP_STAMENS; b4++) {
+        var tb4 = b4 / (BP_STAMENS - 1);
+        var angB4 = BP_START + 10 + tb4 * (BP_SWEEP - 20) + (seeded(b4 + 1000) - 0.5) * 5;
+        var lenB4 = 4 + seeded(b4 + 1050) * 4;
+        bpStamenSpec.push({ a: angB4, l: lenB4 });
+      }
+
+      // 4. Golden Ranunculus (Lower-Left)
+      var gbOuterSpec = [], gbMidSpec = [], gbInnerSpec = [];
+      var GB_SWEEP = 300, GB_START = -60;
+      var GB_OUTER = 22, GB_MID = 24, GB_INNER = 22;
+      var GB_OUTER_W = (GB_SWEEP / GB_OUTER) * 2.6;
+      var GB_MID_W = (GB_SWEEP / GB_MID) * 2.5;
+      var GB_INNER_W = (GB_SWEEP / GB_INNER) * 2.4;
+
+      for (var g1 = 0; g1 < GB_OUTER; g1++) {
+        var tg1 = g1 / (GB_OUTER - 1);
+        var angG = GB_START + tg1 * GB_SWEEP + (seeded(g1 + 1100) - 0.5) * 4;
+        var lenG = 19 + seeded(g1 + 1150) * 5;
+        gbOuterSpec.push({ a: angG, l: lenG, bend: (angG > 90 ? 1 : -1) * 3 });
+      }
+      for (var g2 = 0; g2 < GB_MID; g2++) {
+        var tg2 = g2 / (GB_MID - 1);
+        var angG2 = GB_START + 5 + tg2 * (GB_SWEEP - 10) + (seeded(g2 + 1200) - 0.5) * 4;
+        var lenG2 = 13 + seeded(g2 + 1250) * 4;
+        gbMidSpec.push({ a: angG2, l: lenG2 });
+      }
+      for (var g3 = 0; g3 < GB_INNER; g3++) {
+        var tg3 = g3 / (GB_INNER - 1);
+        var angG3 = GB_START + 8 + tg3 * (GB_SWEEP - 16) + (seeded(g3 + 1300) - 0.5) * 4;
+        var lenG3 = 7 + seeded(g3 + 1350) * 3;
+        gbInnerSpec.push({ a: angG3, l: lenG3 });
+      }
+
+      // 5. Plum Blossom (Lower-Right)
+      var pbOuterSpec = [], pbInnerSpec = [], pbStamenSpec = [];
+      var PB_SWEEP = 310, PB_START = -65;
+      var PB_OUTER = 20, PB_INNER = 22, PB_STAMENS = 34;
+      var PB_OUTER_W = (PB_SWEEP / PB_OUTER) * 2.6;
+      var PB_INNER_W = (PB_SWEEP / PB_INNER) * 2.4;
+
+      for (var p1 = 0; p1 < PB_OUTER; p1++) {
+        var tp1 = p1 / (PB_OUTER - 1);
+        var angP = PB_START + tp1 * PB_SWEEP + (seeded(p1 + 1400) - 0.5) * 4;
+        var lenP = 18 + seeded(p1 + 1450) * 4;
+        pbOuterSpec.push({ a: angP, l: lenP, bend: (angP > 90 ? 1 : -1) * 3 });
+      }
+      for (var p2 = 0; p2 < PB_INNER; p2++) {
+        var tp2 = p2 / (PB_INNER - 1);
+        var angP2 = PB_START + 6 + tp2 * (PB_SWEEP - 12) + (seeded(p2 + 1500) - 0.5) * 4;
+        var lenP2 = 11 + seeded(p2 + 1550) * 3;
+        pbInnerSpec.push({ a: angP2, l: lenP2 });
+      }
+      for (var p3 = 0; p3 < PB_STAMENS; p3++) {
+        var tp3 = p3 / (PB_STAMENS - 1);
+        var angP3 = PB_START + 10 + tp3 * (PB_SWEEP - 20) + (seeded(p3 + 1600) - 0.5) * 5;
+        var lenP3 = 4 + seeded(p3 + 1650) * 3;
+        pbStamenSpec.push({ a: angP3, l: lenP3 });
+      }
+
+      // Sprig definitions
+      var topSprigBranches = [
+        { dist: 14, ox: -3, oy: -2, bend: -2 },
+        { dist: 22, ox: 0, oy: -4, bend: 0 },
+        { dist: 16, ox: 4, oy: -1, bend: 2 }
+      ];
+      var leftSprigBranches = [
+        { dist: 12, ox: -4, oy: -1, bend: -3 },
+        { dist: 18, ox: -2, oy: -4, bend: -1 },
+        { dist: 14, ox: 2, oy: -2, bend: 1 }
+      ];
+      var rightSprigBranches = [
+        { dist: 13, ox: 3, oy: -2, bend: 2 },
+        { dist: 19, ox: 1, oy: -5, bend: 0 },
+        { dist: 15, ox: -2, oy: -2, bend: -1 }
+      ];
+
+      // Floating pollen particles system
+      var pollenParticles = [];
+      function spawnPollen(x, y, count) {
+        for (var i = 0; i < count; i++) {
+          var ang = Math.random() * Math.PI * 2;
+          var spd = Math.random() * 0.8 + 0.3;
+          pollenParticles.push({
+            x: x + (Math.random() - 0.5) * 12,
+            y: y + (Math.random() - 0.5) * 8,
+            vx: Math.cos(ang) * spd,
+            vy: -Math.abs(Math.sin(ang) * spd) - 0.25,
+            life: 0,
+            maxLife: 60 + Math.random() * 70,
+            ch: Math.random() > 0.5 ? '*' : (Math.random() > 0.5 ? '+' : '.')
+          });
+        }
+      }
+
+      // Interaction variables
+      var pointerCol = GATHER_X, pointerRow = 46;
+      var targetPointerCol = GATHER_X, targetPointerRow = 46;
+      var tilt = 0, targetTilt = 0;
+      var pulseStart = -9999;
+      var pulseCol = GATHER_X, pulseRow = 46;
+
+      var anchorEl = document.getElementById('anchor');
+      var bloomEl = document.getElementById('bloom');
+
+      // ---------- RENDER LOOP ----------
+      function render(now) {
+        // Pointer smoothing
+        pointerCol += (targetPointerCol - pointerCol) * 0.08;
+        pointerRow += (targetPointerRow - pointerRow) * 0.08;
+        tilt += (targetTilt - tilt) * 0.05;
+
+        // Ambient wind & container sway
+        var wind = Math.sin(now * 0.0009) * 1.6 + Math.sin(now * 0.0021) * 0.7;
+        anchorEl.style.transform = 'translateX(-50%) rotate(' + (tilt + wind).toFixed(2) + 'deg)';
+
+        // Pulse shockwave
+        var pulseElapsed = now - pulseStart;
+        var pulseWaveDist = (pulseElapsed >= 0 && pulseElapsed < 1200) ? (pulseElapsed * 0.08) : -999;
+
+        var breathe = Math.sin(now * 0.0008) * 0.9;
+        var g = makeGrid();
+
+        // Flower Centers
+        var F_WP = { cx: 92, cy: 46 };   // White Peony
+        var F_LA = { cx: 56, cy: 32 };   // Lavender Aster
+        var F_BP = { cx: 126, cy: 38 };  // Blush Coral Rose
+        var F_GB = { cx: 64, cy: 56 };   // Golden Ranunculus
+        var F_PB = { cx: 120, cy: 56 };  // Plum Blossom
+
+        // Calculate per-flower mouse proximity & angle
+        function getFlowerInfluence(f, hoverR) {
+          var dx = pointerCol - f.cx;
+          var dyMath = -(pointerRow - f.cy) / ASPECT;
+          var dist = Math.sqrt(dx * dx + dyMath * dyMath);
+          var inf = Math.max(0, 1 - dist / hoverR);
+          var angle = Math.atan2(dyMath, dx) * 180 / Math.PI;
+
+          // Pulse wave hit
+          var pWaveInf = 0;
+          if (pulseWaveDist > 0) {
+            var pDist = Math.hypot(f.cx - pulseCol, (f.cy - pulseRow) / ASPECT);
+            var diff = Math.abs(pDist - pulseWaveDist);
+            if (diff < 12) pWaveInf = Math.cos((diff / 12) * Math.PI / 2) * 3.5;
+          }
+          return { inf: inf, angle: angle, pulse: pWaveInf };
+        }
+
+        var infWP = getFlowerInfluence(F_WP, 46);
+        var infLA = getFlowerInfluence(F_LA, 38);
+        var infBP = getFlowerInfluence(F_BP, 40);
+        var infGB = getFlowerInfluence(F_GB, 34);
+        var infPB = getFlowerInfluence(F_PB, 34);
+
+        // ==========================================
+        // LAYER 1: BACKGROUND LEAVES & FOLIAGE
+        // ==========================================
+        paintLeaf(g, 42, 26, 138, 22, 9, 'lf-b', 'lf-v', 0.15); // Arching top-left behind Aster
+        paintLeaf(g, 92, 18, 90, 20, 8, 'lf-b', 'lf-v', 0.05);  // High center leaf
+        paintLeaf(g, 142, 26, 38, 22, 9, 'lf-b', 'lf-v', -0.15); // Arching top-right behind Rose
+        paintLeaf(g, 30, 48, 170, 18, 8, 'lf-m', 'lf-v', 0.2);  // Far left mid foliage
+        paintLeaf(g, 154, 48, 10, 18, 8, 'lf-m', 'lf-v', -0.2); // Far right mid foliage
+
+        // Top and side delicate sprigs
+        drawSprig(g, 92, 20, 90, topSprigBranches, 'fl-f', 'fl-c', now, infWP.inf);
+        drawSprig(g, 36, 42, 145, leftSprigBranches, 'fl-f', 'fl-c', now, infLA.inf);
+        drawSprig(g, 148, 36, 35, rightSprigBranches, 'fl-f', 'fl-c', now, infBP.inf);
+
+        // ==========================================
+        // LAYER 2: REAR STEMS
+        // ==========================================
+        drawStemCurve(g, F_LA.cx, F_LA.cy + 10, GATHER_X - 5, GATHER_Y - 4, -14, 'tb');
+        drawStemCurve(g, F_BP.cx, F_BP.cy + 12, GATHER_X + 5, GATHER_Y - 4, 14, 'tb');
+
+        // ==========================================
+        // LAYER 3: REAR FLOWERS (Lavender Aster & Plum Blossom)
+        // ==========================================
+        // --- Lavender Aster ---
+        var laHot = infLA.inf > 0.42;
+        var laPulse = infLA.pulse;
+        laOuterSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.0011 + idx * 0.8) * 1.1;
+          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infLA.angle)) / 45);
+          var len = p.l + breathe * 0.7 + wobble + laPulse + dirInf * infLA.inf * 3.8;
+          var cls = 'la-o' + ((laHot || dirInf * infLA.inf > 0.4) ? ' hot' : '');
+          paintNeedlePetal(g, F_LA.cx, F_LA.cy, p.a + wobble * 0.2, len, 12, p.bend, cls);
+        });
+        laInnerSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.0014 + idx * 1.1) * 0.9;
+          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infLA.angle)) / 40);
+          var len = p.l + breathe * 0.5 + wobble + laPulse * 0.8 + dirInf * infLA.inf * 2.8;
+          var cls = 'la-i' + ((laHot || dirInf * infLA.inf > 0.4) ? ' hot' : '');
+          paintNeedlePetal(g, F_LA.cx, F_LA.cy, p.a + wobble * 0.25, len, 11, 0, cls);
+        });
+        laCoreSpec.forEach(function (p, idx) {
+          var len = p.l + Math.sin(now * 0.0018 + idx) * 0.4;
+          strokeStamen(g, F_LA.cx, F_LA.cy, p.a, len, 'la-st' + (laHot ? ' hot' : ''));
+        });
+        plot(g, F_LA.cx, F_LA.cy, '*', 'la-st' + (laHot ? ' hot' : ''));
+
+        // --- Plum Blossom (Lower-Right Rear) ---
+        var pbHot = infPB.inf > 0.42;
+        var pbPulse = infPB.pulse;
+        pbOuterSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.001 + idx * 0.9) * 0.8;
+          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infPB.angle)) / 45);
+          var len = p.l + breathe * 0.6 + wobble + pbPulse + dirInf * infPB.inf * 3.0;
+          var cls = 'pb-o' + ((pbHot || dirInf * infPB.inf > 0.4) ? ' hot' : '');
+          paintPetal(g, F_PB.cx, F_PB.cy, p.a + wobble * 0.2, len, PB_OUTER_W, p.bend, cls, 1.2);
+        });
+        pbInnerSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.0013 + idx * 1.2) * 0.7;
+          var len = p.l + breathe * 0.4 + wobble + pbPulse * 0.7;
+          var cls = 'pb-i' + (pbHot ? ' hot' : '');
+          paintPetal(g, F_PB.cx, F_PB.cy, p.a + wobble * 0.25, len, PB_INNER_W, 0, cls, 1.4);
+        });
+        pbStamenSpec.forEach(function (p, idx) {
+          var len = p.l + Math.sin(now * 0.0016 + idx) * 0.3;
+          strokeStamen(g, F_PB.cx, F_PB.cy, p.a, len, 'pb-st' + (pbHot ? ' hot' : ''));
+        });
+        plot(g, F_PB.cx, F_PB.cy, 'o', 'pb-st' + (pbHot ? ' hot' : ''));
+
+        // ==========================================
+        // LAYER 4: KRAFT WRAP BACK FOLDS
+        // ==========================================
+        // Back folds behind the front focal flowers
+        for (var wy = 56; wy <= GATHER_Y; wy++) {
+          var tWrap = (wy - 56) / (GATHER_Y - 56);
+          var leftEdge = 48 + tWrap * 38;
+          var rightEdge = 136 - tWrap * 38;
+          for (var wx = Math.round(leftEdge); wx <= Math.round(rightEdge); wx++) {
+            if ((wx + wy) % 2 === 0) {
+              var border = (wx <= leftEdge + 2 || wx >= rightEdge - 2);
+              plot(g, wx, wy, border ? '/' : '\\', border ? 'wr-h' : 'wr-b');
+            }
+          }
+        }
+
+        // Mid leaves branching out over the wrap
+        paintLeaf(g, 62, 60, 215, 14, 7, 'lf-f', 'lf-v', 0.15); // Flanking left wrap rim
+        paintLeaf(g, 122, 60, -35, 14, 7, 'lf-f', 'lf-v', -0.15); // Flanking right wrap rim
+
+        // ==========================================
+        // LAYER 5: FOREGROUND FLOWERS (Blush Rose, Buttercup, White Peony)
+        // ==========================================
+        // --- Blush Coral Rose (Upper-Right) ---
+        var bpHot = infBP.inf > 0.42;
+        var bpPulse = infBP.pulse;
+        bpOuterSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.00095 + idx * 0.8) * 1.1;
+          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infBP.angle)) / 44);
+          var len = p.l + breathe * 0.8 + wobble + bpPulse + dirInf * infBP.inf * 3.6;
+          var cls = 'bp-o' + ((bpHot || dirInf * infBP.inf > 0.4) ? ' hot' : '');
+          paintPetal(g, F_BP.cx, F_BP.cy, p.a + wobble * 0.25, len, BP_OUTER_W, p.bend, cls, 1.1);
+        });
+        bpMidSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.0011 + idx * 1.1) * 0.9;
+          var len = p.l + breathe * 0.6 + wobble + bpPulse * 0.8;
+          var cls = 'bp-m' + (bpHot ? ' hot' : '');
+          paintPetal(g, F_BP.cx, F_BP.cy, p.a + wobble * 0.3, len, BP_MID_W, p.bend, cls, 1.3);
+        });
+        bpInnerSpec.forEach(function (p, idx) {
+          var len = p.l + breathe * 0.4 + bpPulse * 0.6;
+          var cls = 'bp-i' + (bpHot ? ' hot' : '');
+          paintPetal(g, F_BP.cx, F_BP.cy, p.a, len, BP_INNER_W, 0, cls, 1.5);
+        });
+        bpStamenSpec.forEach(function (p, idx) {
+          var len = p.l + Math.sin(now * 0.0015 + idx) * 0.4;
+          strokeStamen(g, F_BP.cx, F_BP.cy, p.a, len, 'bp-st' + (bpHot ? ' hot' : ''));
+        });
+        plot(g, F_BP.cx, F_BP.cy, '*', 'bp-st' + (bpHot ? ' hot' : ''));
+
+        // --- Golden Ranunculus (Lower-Left) ---
+        var gbHot = infGB.inf > 0.42;
+        var gbPulse = infGB.pulse;
+        gbOuterSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.001 + idx * 0.85) * 0.9;
+          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infGB.angle)) / 44);
+          var len = p.l + breathe * 0.7 + wobble + gbPulse + dirInf * infGB.inf * 3.2;
+          var cls = 'gb-o' + ((gbHot || dirInf * infGB.inf > 0.4) ? ' hot' : '');
+          paintPetal(g, F_GB.cx, F_GB.cy, p.a + wobble * 0.2, len, GB_OUTER_W, p.bend, cls, 1.2);
+        });
+        gbMidSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.0012 + idx * 1.1) * 0.8;
+          var len = p.l + breathe * 0.5 + wobble + gbPulse * 0.7;
+          var cls = 'gb-m' + (gbHot ? ' hot' : '');
+          paintPetal(g, F_GB.cx, F_GB.cy, p.a + wobble * 0.25, len, GB_MID_W, 0, cls, 1.4);
+        });
+        gbInnerSpec.forEach(function (p, idx) {
+          var len = p.l + breathe * 0.3 + gbPulse * 0.5;
+          var cls = 'gb-i' + (gbHot ? ' hot' : '');
+          paintPetal(g, F_GB.cx, F_GB.cy, p.a, len, GB_INNER_W, 0, cls, 1.6);
+        });
+        plot(g, F_GB.cx, F_GB.cy, 'o', 'gb-st');
+
+        // --- Central Stems connecting to White Peony & Gather Point ---
+        drawStemCurve(g, F_WP.cx, F_WP.cy + 14, GATHER_X, GATHER_Y - 2, 0, 'tb');
+        drawStemCurve(g, F_GB.cx, F_GB.cy + 10, GATHER_X - 4, GATHER_Y - 2, -6, 'tb');
+        drawStemCurve(g, F_PB.cx, F_PB.cy + 10, GATHER_X + 4, GATHER_Y - 2, 6, 'tb');
+
+        // --- White Peony (Grand Focal Hero Bloom) ---
+        var wpHot = infWP.inf > 0.42;
+        var wpPulse = infWP.pulse;
+        wpOuterSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.0009 + idx * 0.7) * 1.3;
+          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infWP.angle)) / 46);
+          var len = p.l + breathe + wobble + wpPulse + dirInf * infWP.inf * 4.2;
+          var cls = 'wp-o' + ((wpHot || dirInf * infWP.inf > 0.4) ? ' hot' : '');
+          paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.25, len, WP_OUTER_W, p.bend, cls, 1.0);
+        });
+        wpMidSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.001 + idx * 1.1) * 1.0;
+          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infWP.angle)) / 42);
+          var len = p.l + breathe * 0.8 + wobble + wpPulse * 0.8 + dirInf * infWP.inf * 3.4;
+          var cls = 'wp-m' + ((wpHot || dirInf * infWP.inf > 0.4) ? ' hot' : '');
+          paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.3, len, WP_MID_W, p.bend, cls, 1.3);
+        });
+        wpInnerSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.0012 + idx * 1.4) * 0.8;
+          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infWP.angle)) / 38);
+          var len = p.l + breathe * 0.5 + wobble + wpPulse * 0.6 + dirInf * infWP.inf * 2.6;
+          var cls = 'wp-i' + ((wpHot || dirInf * infWP.inf > 0.4) ? ' hot' : '');
+          paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.35, len, WP_INNER_W, 0, cls, 1.6);
+        });
+        wpStamenSpec.forEach(function (p, idx) {
+          var wobble = Math.sin(now * 0.0014 + idx * 1.8) * 0.5;
+          var len = p.l + wobble + wpPulse * 0.35;
+          var cls = 'wp-st' + (wpHot ? ' hot' : '');
+          strokeStamen(g, F_WP.cx, F_WP.cy, p.a, len, cls);
+        });
+
+        // Peony Carpels / Core
+        for (var ry = -3; ry <= 3; ry++) {
+          for (var rx = -5; rx <= 5; rx++) {
+            var dist = Math.sqrt(rx * rx * 0.75 + ry * ry * 1.7);
+            if (dist > 3.6) continue;
+            var ch = dist < 1.8 ? '*' : (Math.abs(rx) > Math.abs(ry) ? '-' : '|');
+            plot(g, F_WP.cx + rx, F_WP.cy + ry, ch, 'wp-sg');
+          }
+        }
+
+        // ==========================================
+        // LAYER 6: KRAFT WRAP FRONT COLLAR & STEM BUNDLE
+        // ==========================================
+        // Stems extending cleanly below the gather point
+        for (var sy = GATHER_Y + 2; sy < ROWS - 4; sy++) {
+          var sWidth = 4 - Math.round((sy - GATHER_Y) * 0.06);
+          for (var sx = GATHER_X - sWidth; sx <= GATHER_X + sWidth; sx++) {
+            var sch = (sx === GATHER_X - sWidth || sx === GATHER_X + sWidth) ? '|' : '|';
+            plot(g, sx, sy, sch, 'tb');
+            if ((sy - GATHER_Y) % 3 === 0 && sx === GATHER_X) plot(g, sx, sy, '`', 'tb');
+          }
+        }
+
+        // Kraft paper wrapping around the stem bundle below the bow
+        for (var ky = GATHER_Y + 1; ky <= GATHER_Y + 9; ky++) {
+          var kw = 5 - Math.round((ky - GATHER_Y) * 0.2);
+          for (var kx = GATHER_X - kw; kx <= GATHER_X + kw; kx++) {
+            var kedge = (kx === GATHER_X - kw || kx === GATHER_X + kw);
+            plot(g, kx, ky, kedge ? '|' : (kx % 2 === 0 ? '/' : '\\'), kedge ? 'wr-h' : 'wr-m');
+          }
+        }
+
+        // Front folded collar wrapping around the bouquet gather
+        var collarY0 = 65, collarY1 = GATHER_Y;
+        for (var cy = collarY0; cy <= collarY1; cy++) {
+          var tCollar = (cy - collarY0) / (collarY1 - collarY0);
+          var leftWing = 66 + tCollar * 24;
+          var rightWing = 118 - tCollar * 24;
+          for (var cx = Math.round(leftWing); cx <= Math.round(rightWing); cx++) {
+            // diagonal origami fold lines
+            var isLeftEdge = (cx <= leftWing + 1);
+            var isRightEdge = (cx >= rightWing - 1);
+            var isCrease = (Math.abs(cx - GATHER_X) === Math.round(tCollar * 8));
+            var cCls = (isLeftEdge || isRightEdge) ? 'wr-h' : (isCrease ? 'wr-l' : 'wr-m');
+            var cCh = isLeftEdge ? '/' : (isRightEdge ? '\\' : (isCrease ? '|' : ((cx + cy) % 2 === 0 ? '/' : '\\')));
+            plot(g, cx, cy, cCh, cCls);
+          }
+        }
+
+        // ==========================================
+        // LAYER 7: RIBBON, KNOT, BOW LOOPS & FLUTTERING TAILS
+        // ==========================================
+        var bowDist = Math.hypot(pointerCol - GATHER_X, (pointerRow - GATHER_Y) / ASPECT);
+        var bowHot = bowDist < 26;
+        var bowFlutter = Math.sin(now * 0.0035) * 1.5 + (bowHot ? Math.sin(now * 0.008) * 2.0 : 0);
+
+        // Left Bow Loop
+        for (var aLoopL = 0; aLoopL <= Math.PI; aLoopL += 0.18) {
+          var lx = GATHER_X - 2 - Math.sin(aLoopL) * (14 + Math.sin(now * 0.002) * 1.2);
+          var ly = GATHER_Y - 2 - Math.cos(aLoopL) * 5 * ASPECT + Math.sin(aLoopL) * bowFlutter * 0.4;
+          plot(g, lx, ly, '(', bowHot ? 'rb-l hot' : 'rb-l');
+          plot(g, lx + 1, ly, '#', 'rb-h');
+        }
+        // Right Bow Loop
+        for (var aLoopR = 0; aLoopR <= Math.PI; aLoopR += 0.18) {
+          var rx = GATHER_X + 2 + Math.sin(aLoopR) * (14 + Math.cos(now * 0.002) * 1.2);
+          var ry = GATHER_Y - 2 - Math.cos(aLoopR) * 5 * ASPECT - Math.sin(aLoopR) * bowFlutter * 0.4;
+          plot(g, rx, ry, ')', bowHot ? 'rb-l hot' : 'rb-l');
+          plot(g, rx - 1, ry, '#', 'rb-h');
+        }
+
+        // Central Ribbon Knot
+        plot(g, GATHER_X - 1, GATHER_Y - 1, '#', bowHot ? 'rb-k hot' : 'rb-k');
+        plot(g, GATHER_X, GATHER_Y - 1, '@', bowHot ? 'rb-k hot' : 'rb-k');
+        plot(g, GATHER_X + 1, GATHER_Y - 1, '#', bowHot ? 'rb-k hot' : 'rb-k');
+        plot(g, GATHER_X - 1, GATHER_Y, '(', bowHot ? 'rb-k hot' : 'rb-k');
+        plot(g, GATHER_X, GATHER_Y, 'O', bowHot ? 'rb-k hot' : 'rb-k');
+        plot(g, GATHER_X + 1, GATHER_Y, ')', bowHot ? 'rb-k hot' : 'rb-k');
+        plot(g, GATHER_X, GATHER_Y + 1, '#', bowHot ? 'rb-k hot' : 'rb-k');
+
+        // Fluttering Ribbon Tails
+        for (var ty = GATHER_Y + 1; ty < ROWS - 4; ty++) {
+          var tSwayL = Math.sin(now * 0.0032 + ty * 0.24) * (2.2 + Math.abs(tilt) * 0.4);
+          var txL = GATHER_X - 3 - (ty - GATHER_Y) * 0.38 + tSwayL;
+          var isTipL = (ty === ROWS - 5);
+          plot(g, txL, ty, isTipL ? 'v' : '/', bowHot ? 'rb-t hot' : 'rb-t');
+          plot(g, txL + 1, ty, isTipL ? 'v' : '|', bowHot ? 'rb-t hot' : 'rb-t');
+
+          var tSwayR = Math.sin(now * 0.0028 + ty * 0.22 + 1.2) * (2.5 + Math.abs(tilt) * 0.4);
+          var txR = GATHER_X + 3 + (ty - GATHER_Y) * 0.45 + tSwayR;
+          var isTipR = (ty === ROWS - 5);
+          plot(g, txR, ty, isTipR ? 'v' : '\\', bowHot ? 'rb-t hot' : 'rb-t');
+          plot(g, txR - 1, ty, isTipR ? 'v' : '|', bowHot ? 'rb-t hot' : 'rb-t');
+        }
+
+        // ==========================================
+        // LAYER 8: LUMINOUS POLLEN / SPARKLES
+        // ==========================================
+        // Occasional gentle ambient pollen drift
+        if (pollenParticles.length < 8 && Math.random() < 0.04) {
+          var fList = [F_WP, F_LA, F_BP, F_GB, F_PB];
+          var rf = fList[Math.floor(Math.random() * fList.length)];
+          pollenParticles.push({
+            x: rf.cx + (Math.random() - 0.5) * 18,
+            y: rf.cy + (Math.random() - 0.5) * 12,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: -Math.random() * 0.3 - 0.15,
+            life: 0,
+            maxLife: 80 + Math.random() * 60,
+            ch: Math.random() > 0.5 ? '*' : (Math.random() > 0.5 ? '+' : '.')
+          });
+        }
+
+        for (var pIdx = pollenParticles.length - 1; pIdx >= 0; pIdx--) {
+          var part = pollenParticles[pIdx];
+          part.x += part.vx + Math.sin(now * 0.002 + part.y * 0.1) * 0.2;
+          part.y += part.vy;
+          part.life++;
+          if (part.life >= part.maxLife || part.y < 2 || part.x < 2 || part.x >= COLS - 2) {
+            pollenParticles.splice(pIdx, 1);
+            continue;
+          }
+          plot(g, part.x, part.y, part.ch, 'pol');
+        }
+
+        // Render grid to pre tag
+        bloomEl.innerHTML = gridToHtml(g);
+        requestAnimationFrame(render);
+      }
+
+      // ---------- SPAN RUN-LENGTH COMPRESSOR ----------
+      function gridToHtml(g) {
+        var out = [];
+        for (var r = 0; r < ROWS; r++) {
+          var row = g[r], line = '', curCls = null, buf = '';
+          for (var c = 0; c < COLS; c++) {
+            var cell = row[c];
+            var ch = cell ? cell.ch : ' ';
+            var cls = cell ? cell.cls : null;
+            if (cls !== curCls) {
+              line += curCls ? ('<span class="' + curCls + '">' + buf + '</span>') : buf;
+              buf = '';
+              curCls = cls;
+            }
+            buf += ch;
+          }
+          line += curCls ? ('<span class="' + curCls + '">' + buf + '</span>') : buf;
+          out.push(line);
+        }
+        return out.join('\n');
+      }
+
+      // ---------- RESPONSIVE FONT SCALING ----------
+      function fit() {
+        var availW = window.innerWidth - 16;
+        var availH = (window.innerHeight - 16) * 0.95;
+        var fsW = availW / (COLS * 0.60);
+        var fsH = availH / (ROWS * 0.98);
+        var fs = Math.max(2.2, Math.min(fsW, fsH, 20));
+        bloomEl.style.fontSize = fs + 'px';
+      }
+      window.addEventListener('resize', fit);
+      fit();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+
+      // ---------- INTERACTION LISTENERS ----------
+      function updatePointer(clientX, clientY) {
+        var rect = anchorEl.getBoundingClientRect();
+        var originX = rect.left + rect.width / 2;
+        var originY = rect.bottom;
+        var normX = (clientX - rect.left) / (rect.width || 1);
+        var normY = (clientY - rect.top) / (rect.height || 1);
+
+        targetPointerCol = Math.max(0, Math.min(COLS - 1, normX * COLS));
+        targetPointerRow = Math.max(0, Math.min(ROWS - 1, normY * ROWS));
+        targetTilt = Math.max(-6, Math.min(6, ((clientX / window.innerWidth) - 0.5) * 12));
+      }
+
+      window.addEventListener('mousemove', function (e) { updatePointer(e.clientX, e.clientY); });
+      window.addEventListener('touchmove', function (e) {
+        if (e.touches && e.touches[0]) updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+
+      function handleClick(clientX, clientY) {
+        updatePointer(clientX, clientY);
+        pulseStart = performance.now();
+        pulseCol = targetPointerCol;
+        pulseRow = targetPointerRow;
+
+        // Spawn burst of luminous pollen sparkles
+        spawnPollen(pulseCol, pulseRow, 22);
+      }
+
+      window.addEventListener('click', function (e) { handleClick(e.clientX, e.clientY); });
+      window.addEventListener('touchend', function (e) {
+        if (e.changedTouches && e.changedTouches[0]) handleClick(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+      }, { passive: true });
+
+      requestAnimationFrame(render);
+    })();
+  </script>
+
+</body>
+
+</html>
