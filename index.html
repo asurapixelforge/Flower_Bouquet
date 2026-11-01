@@ -35,8 +35,8 @@
 </head>
 
 <body>
-  <!-- layout: full-bleed night canvas; a grand floral bouquet in solid-fill ASCII text-grid art style, featuring white peony, lavender aster, blush coral rose, golden ranunculus, plum blossoms, leaves, kraft wrap, and an animated fluttering bow -->
-  <title>Bouquet of Blooms</title>
+  <!-- layout: full-bleed night canvas; click-to-inspect botanical biology diagram of an interactive floral bouquet in solid-fill ASCII text-grid art style, featuring white peony, lavender aster, blush coral rose, golden ranunculus, plum blossoms, leaves, kraft wrap, and an animated fluttering bow -->
+  <title>Botanical Bouquet &bull; Biology Diagram</title>
   <style>
     :root {
       --void: #000000;
@@ -150,6 +150,11 @@
       cursor: pointer;
     }
 
+    pre#bloom,
+    pre#bloom span {
+      cursor: pointer;
+    }
+
     pre#bloom {
       margin: 0;
       font-family: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
@@ -158,7 +163,7 @@
       letter-spacing: 0;
     }
 
-    /* Stem */
+    /* Base stem */
     .tb {
       color: var(--stem);
     }
@@ -441,6 +446,298 @@
       text-shadow: 0 0 8px rgba(255, 230, 148, 0.9);
     }
 
+    /* ========================================================
+     BIOLOGY SPOTLIGHT & DARKENING EFFECT (CLICK-TRIGGERED ONLY)
+     When a flower is clicked: others stay dark while it lights up
+     ======================================================== */
+    pre#bloom.has-focus span {
+      opacity: 0.16;
+      filter: brightness(0.24) saturate(0.3);
+      text-shadow: none !important;
+    }
+
+    /* Interactive flower spans with distinct classes */
+    pre#bloom span[data-flower],
+    pre#bloom span.fl-wp,
+    pre#bloom span.flower-peony,
+    pre#bloom span.fl-la,
+    pre#bloom span.flower-aster,
+    pre#bloom span.fl-bp,
+    pre#bloom span.flower-rose,
+    pre#bloom span.fl-gb,
+    pre#bloom span.flower-buttercup,
+    pre#bloom span.fl-pb,
+    pre#bloom span.flower-plum,
+    pre#bloom span.fl-rb,
+    pre#bloom span.flower-wrap {
+      cursor: pointer;
+    }
+
+    /* Whitelist White Peony */
+    pre#bloom.focus-wp span.fl-wp,
+    pre#bloom.focus-wp span.flower-peony,
+    pre#bloom.focus-wp span.flower-white-peony,
+    pre#bloom.focus-wp span.flower-wp,
+    pre#bloom.focus-wp span[data-flower="wp"],
+    pre#bloom.focus-wp span.wp-o,
+    pre#bloom.focus-wp span.wp-m,
+    pre#bloom.focus-wp span.wp-i,
+    pre#bloom.focus-wp span.wp-st,
+    pre#bloom.focus-wp span.wp-sg {
+      opacity: 1 !important;
+      filter: brightness(1.24) saturate(1.1) !important;
+    }
+
+    /* Whitelist Lavender Aster */
+    pre#bloom.focus-la span.fl-la,
+    pre#bloom.focus-la span.flower-aster,
+    pre#bloom.focus-la span.flower-lavender-aster,
+    pre#bloom.focus-la span.flower-la,
+    pre#bloom.focus-la span[data-flower="la"],
+    pre#bloom.focus-la span.la-o,
+    pre#bloom.focus-la span.la-i,
+    pre#bloom.focus-la span.la-st {
+      opacity: 1 !important;
+      filter: brightness(1.26) saturate(1.2) !important;
+    }
+
+    /* Whitelist Blush Coral Rose */
+    pre#bloom.focus-bp span.fl-bp,
+    pre#bloom.focus-bp span.flower-rose,
+    pre#bloom.focus-bp span.flower-coral-rose,
+    pre#bloom.focus-bp span.flower-bp,
+    pre#bloom.focus-bp span[data-flower="bp"],
+    pre#bloom.focus-bp span.bp-o,
+    pre#bloom.focus-bp span.bp-m,
+    pre#bloom.focus-bp span.bp-i,
+    pre#bloom.focus-bp span.bp-st {
+      opacity: 1 !important;
+      filter: brightness(1.26) saturate(1.15) !important;
+    }
+
+    /* Whitelist Golden Ranunculus */
+    pre#bloom.focus-gb span.fl-gb,
+    pre#bloom.focus-gb span.flower-buttercup,
+    pre#bloom.focus-gb span.flower-golden-buttercup,
+    pre#bloom.focus-gb span.flower-gb,
+    pre#bloom.focus-gb span[data-flower="gb"],
+    pre#bloom.focus-gb span.gb-o,
+    pre#bloom.focus-gb span.gb-m,
+    pre#bloom.focus-gb span.gb-i,
+    pre#bloom.focus-gb span.gb-st {
+      opacity: 1 !important;
+      filter: brightness(1.26) saturate(1.2) !important;
+    }
+
+    /* Whitelist Plum Blossom */
+    pre#bloom.focus-pb span.fl-pb,
+    pre#bloom.focus-pb span.flower-plum,
+    pre#bloom.focus-pb span.flower-plum-blossom,
+    pre#bloom.focus-pb span.flower-pb,
+    pre#bloom.focus-pb span[data-flower="pb"],
+    pre#bloom.focus-pb span.pb-o,
+    pre#bloom.focus-pb span.pb-i,
+    pre#bloom.focus-pb span.pb-st {
+      opacity: 1 !important;
+      filter: brightness(1.26) saturate(1.2) !important;
+    }
+
+    /* Whitelist Kraft Wrap & Bow */
+    pre#bloom.focus-rb span.fl-rb,
+    pre#bloom.focus-rb span.flower-wrap,
+    pre#bloom.focus-rb span.flower-kraft-wrap,
+    pre#bloom.focus-rb span.flower-rb,
+    pre#bloom.focus-rb span[data-flower="rb"],
+    pre#bloom.focus-rb span.rb-k,
+    pre#bloom.focus-rb span.rb-l,
+    pre#bloom.focus-rb span.rb-t,
+    pre#bloom.focus-rb span.rb-h,
+    pre#bloom.focus-rb span.wr-b,
+    pre#bloom.focus-rb span.wr-m,
+    pre#bloom.focus-rb span.wr-h,
+    pre#bloom.focus-rb span.wr-l {
+      opacity: 1 !important;
+      filter: brightness(1.22) !important;
+    }
+
+    /* Floating sparkles remain visible */
+    pre#bloom.has-focus span.pol {
+      opacity: 0.95 !important;
+      filter: brightness(1.1) !important;
+    }
+
+    /* Invisible tracking markers attached to flower centers */
+    .flower-marker {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    /* ========================================================
+     FULL-SCREEN SVG OVERLAY FOR DYNAMIC BIOLOGY LEADER LINE
+     Spans from the clicked flower to the side margin card
+     ======================================================== */
+    .screen-diagram-svg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 90;
+    }
+
+    .screen-leader-line {
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: opacity 0.3s ease;
+    }
+
+    .reticle-ring {
+      fill: none;
+      stroke-width: 1.2;
+      opacity: 0.85;
+    }
+
+    .reticle-dashed {
+      fill: none;
+      stroke-width: 1.0;
+      stroke-dasharray: 4 3;
+      animation: reticleSpin 12s linear infinite;
+      transform-origin: center;
+      opacity: 0.6;
+    }
+
+    .reticle-dot,
+    .screen-terminal {
+      opacity: 0.95;
+    }
+
+    @keyframes reticleSpin {
+      from {
+        stroke-dashoffset: 0;
+      }
+
+      to {
+        stroke-dashoffset: 50;
+      }
+    }
+
+    /* ========================================================
+     BOTANICAL BIOLOGY DIAGRAM TAXONOMY CARDS
+     Located far away in the viewport margins (unobstructed)
+     ======================================================== */
+    .bio-viewport-cards {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 95;
+    }
+
+    .bio-card {
+      position: fixed;
+      width: clamp(220px, 20vw, 290px);
+      padding: 12px 16px;
+      background: rgba(9, 13, 11, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 5px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.92);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: 'IBM Plex Mono', monospace;
+      backdrop-filter: blur(12px);
+      z-index: 99;
+    }
+
+    .bio-card.card-left {
+      left: max(20px, 3.5vw);
+      transform: translateX(-20px);
+    }
+
+    .bio-card.card-right {
+      right: max(20px, 3.5vw);
+      transform: translateX(20px);
+    }
+
+    .bio-card.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    .bio-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .bio-card .bio-badge {
+      font-size: clamp(8px, 0.72vw, 9.5px);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bio-card .bio-badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 6px currentColor;
+    }
+
+    .bio-close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #9aa08f;
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: 3px;
+      padding: 1px 6px;
+      line-height: 1.2;
+      transition: all 0.2s ease;
+    }
+
+    .bio-close-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .bio-card .bio-title {
+      font-size: clamp(12.5px, 1.15vw, 16px);
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      margin-bottom: 2px;
+    }
+
+    .bio-card .bio-latin {
+      font-size: clamp(10px, 0.9vw, 12.5px);
+      font-style: italic;
+      color: #d2dbd0;
+      margin-bottom: 6px;
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    .bio-card .bio-desc {
+      font-size: clamp(8.5px, 0.8vw, 11px);
+      line-height: 1.42;
+      color: #8fa08e;
+      border-top: 1px dashed rgba(255, 255, 255, 0.14);
+      padding-top: 6px;
+      margin-top: 4px;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .star {
         animation: none;
@@ -452,8 +749,114 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 
   <div class="sky" id="sky"></div>
+
   <div class="anchor" id="anchor">
+    <!-- Monospace ASCII Bloom Canvas -->
     <pre id="bloom"></pre>
+
+    <!-- Invisible DOM markers for tracking flower centers through CSS transforms -->
+    <div id="marker-wp" class="flower-marker" style="left: calc(92 / 184 * 100%); top: calc(46 / 100 * 100%);"></div>
+    <div id="marker-la" class="flower-marker" style="left: calc(56 / 184 * 100%); top: calc(32 / 100 * 100%);"></div>
+    <div id="marker-bp" class="flower-marker" style="left: calc(126 / 184 * 100%); top: calc(38 / 100 * 100%);"></div>
+    <div id="marker-gb" class="flower-marker" style="left: calc(64 / 184 * 100%); top: calc(56 / 100 * 100%);"></div>
+    <div id="marker-pb" class="flower-marker" style="left: calc(120 / 184 * 100%); top: calc(56 / 100 * 100%);"></div>
+    <div id="marker-rb" class="flower-marker" style="left: calc(92 / 184 * 100%); top: calc(74 / 100 * 100%);"></div>
+  </div>
+
+  <!-- Full-screen SVG for dynamic biology leader line extending across the sky -->
+  <svg class="screen-diagram-svg" id="screenSvg">
+    <g id="screenDiagGroup" style="opacity: 0; transition: opacity 0.3s ease;">
+      <circle id="screenReticle" r="16" class="reticle-ring" />
+      <circle id="screenReticleDashed" r="24" class="reticle-dashed" />
+      <circle id="screenDot" r="3.5" class="reticle-dot" />
+      <polyline id="screenLine" class="screen-leader-line" />
+      <circle id="screenTerminal" r="4.5" class="screen-terminal" />
+    </g>
+  </svg>
+
+  <!-- Botanical Biology Diagram Cards positioned in viewport margins (never obstructing the flowers) -->
+  <div class="bio-viewport-cards" id="bioCardsContainer">
+    <!-- Card 1: White Peony -->
+    <div class="bio-card card-left" id="card-wp"
+      style="top: 15vh; border-color: rgba(255,250,243,0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.92), 0 0 18px rgba(255,250,243,0.25);">
+      <div class="bio-card-header">
+        <span class="bio-badge" style="color: #fffaf3;">FIG. 01 &bull; HERO SPECIMEN</span>
+        <button class="bio-close-btn" onclick="deselectSpecimen(event)">&times;</button>
+      </div>
+      <div class="bio-title" style="color: #fffaf3; text-shadow: 0 0 10px rgba(255,250,243,0.85);">WHITE PEONY</div>
+      <div class="bio-latin">Paeonia lactiflora &bull; Fam. Paeoniaceae</div>
+      <div class="bio-desc">Complete 360&deg; radial bloom &bull; Multi-tiered ivory guard petals with radiant golden
+        stamen corona.</div>
+    </div>
+
+    <!-- Card 2: Lavender Aster -->
+    <div class="bio-card card-left" id="card-la"
+      style="top: 36vh; border-color: rgba(199,168,248,0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.92), 0 0 18px rgba(199,168,248,0.25);">
+      <div class="bio-card-header">
+        <span class="bio-badge" style="color: #bb9af8;">FIG. 02 &bull; COMPOSITE SPECIMEN</span>
+        <button class="bio-close-btn" onclick="deselectSpecimen(event)">&times;</button>
+      </div>
+      <div class="bio-title" style="color: #bb9af8; text-shadow: 0 0 10px rgba(187,154,248,0.85);">LAVENDER ASTER</div>
+      <div class="bio-latin">Aster amellus &bull; Fam. Asteraceae</div>
+      <div class="bio-desc">Complete 360&deg; starburst ray florets in luminous violet surrounding a dense golden disc
+        center.</div>
+    </div>
+
+    <!-- Card 3: Golden Ranunculus -->
+    <div class="bio-card card-left" id="card-gb"
+      style="top: 57vh; border-color: rgba(255,213,132,0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.92), 0 0 18px rgba(255,213,132,0.25);">
+      <div class="bio-card-header">
+        <span class="bio-badge" style="color: #ffd584;">FIG. 03 &bull; RANUNCULUS SPECIMEN</span>
+        <button class="bio-close-btn" onclick="deselectSpecimen(event)">&times;</button>
+      </div>
+      <div class="bio-title" style="color: #ffd584; text-shadow: 0 0 10px rgba(255,213,132,0.85);">GOLDEN BUTTERCUP
+      </div>
+      <div class="bio-latin">Ranunculus asiaticus &bull; Fam. Ranunculaceae</div>
+      <div class="bio-desc">Complete 360&deg; concentric rosette with dense ruffled imbricate petals in warm apricot
+        champagne.</div>
+    </div>
+
+    <!-- Card 4: Blush Coral Rose -->
+    <div class="bio-card card-right" id="card-bp"
+      style="top: 22vh; border-color: rgba(255,152,167,0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.92), 0 0 18px rgba(255,152,167,0.25);">
+      <div class="bio-card-header">
+        <span class="bio-badge" style="color: #ff98a7;">FIG. 04 &bull; ROSACEAE SPECIMEN</span>
+        <button class="bio-close-btn" onclick="deselectSpecimen(event)">&times;</button>
+      </div>
+      <div class="bio-title" style="color: #ff98a7; text-shadow: 0 0 10px rgba(255,152,167,0.85);">CORAL BLUSH ROSE
+      </div>
+      <div class="bio-latin">Rosa damascena &bull; Fam. Rosaceae</div>
+      <div class="bio-desc">Complete 360&deg; English cabbage rose with lush cupped petals in pastel peach &amp; dusty
+        coral.</div>
+    </div>
+
+    <!-- Card 5: Plum Blossom -->
+    <div class="bio-card card-right" id="card-pb"
+      style="top: 45vh; border-color: rgba(234,111,162,0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.92), 0 0 18px rgba(234,111,162,0.25);">
+      <div class="bio-card-header">
+        <span class="bio-badge" style="color: #ea6fa2;">FIG. 05 &bull; PRUNUS SPECIMEN</span>
+        <button class="bio-close-btn" onclick="deselectSpecimen(event)">&times;</button>
+      </div>
+      <div class="bio-title" style="color: #ea6fa2; text-shadow: 0 0 10px rgba(234,111,162,0.85);">PLUM BERRY BLOSSOM
+      </div>
+      <div class="bio-latin">Prunus mume &bull; Fam. Rosaceae</div>
+      <div class="bio-desc">Complete 360&deg; radial blossom with velvety jewel ruby petals and radiating golden
+        anthers.</div>
+    </div>
+
+    <!-- Card 6: Kraft Wrap & Silk Bow -->
+    <div class="bio-card card-right" id="card-rb"
+      style="top: 67vh; border-color: rgba(255,159,176,0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.92), 0 0 18px rgba(255,159,176,0.25);">
+      <div class="bio-card-header">
+        <span class="bio-badge" style="color: #ff9fb0;">FIG. 06 &bull; GATHER &amp; BINDING</span>
+        <button class="bio-close-btn" onclick="deselectSpecimen(event)">&times;</button>
+      </div>
+      <div class="bio-title" style="color: #ff9fb0; text-shadow: 0 0 10px rgba(255,159,176,0.85);">KRAFT WRAP &amp; BOW
+      </div>
+      <div class="bio-latin">Involucrum florale &bull; Silk ribbon</div>
+      <div class="bio-desc">Geometric folded origami kraft collar tied with a satin knot and cascading flutter tails.
+      </div>
+    </div>
   </div>
 
   <script>
@@ -473,10 +876,34 @@
         sky.appendChild(d);
       }
 
-      // ---------- grid geometry ----------
+      // ---------- grid geometry & fast lookup tables ----------
       var COLS = 184, ROWS = 100;
       var ASPECT = 0.52; // compresses vertical monospace steps so geometry reads circular
       var GATHER_X = 92, GATHER_Y = 73;
+
+      // Precomputed lookup tables for dx [-50..50], dy [-50..50]
+      var LUT_OFFSET = 50;
+      var LUT_SIZE = 101;
+      var DIR_CHAR_LUT = new Array(LUT_SIZE * LUT_SIZE);
+      var ATAN2_LUT = new Float32Array(LUT_SIZE * LUT_SIZE);
+      var DIST_LUT = new Float32Array(LUT_SIZE * LUT_SIZE);
+      var TO_DEG = 180 / Math.PI;
+
+      for (var ldy = -LUT_OFFSET; ldy <= LUT_OFFSET; ldy++) {
+        var dyM = -ldy / ASPECT;
+        var dyM2 = dyM * dyM;
+        var rowIdx = (ldy + LUT_OFFSET) * LUT_SIZE;
+        for (var ldx = -LUT_OFFSET; ldx <= LUT_OFFSET; ldx++) {
+          var idx = rowIdx + (ldx + LUT_OFFSET);
+          var adx = Math.abs(ldx), ady = Math.abs(ldy);
+          if (ady < 0.4 * adx) DIR_CHAR_LUT[idx] = '-';
+          else if (adx < 0.4 * ady) DIR_CHAR_LUT[idx] = '|';
+          else DIR_CHAR_LUT[idx] = ((ldx > 0 && ldy > 0) || (ldx < 0 && ldy < 0)) ? '\\' : '/';
+
+          ATAN2_LUT[idx] = Math.atan2(dyM, ldx) * TO_DEG;
+          DIST_LUT[idx] = Math.sqrt(ldx * ldx + dyM2);
+        }
+      }
 
       function seeded(n) {
         var x = Math.sin(n * 12.9898 + 4.1414) * 43758.5453;
@@ -490,69 +917,107 @@
       }
       function angleDiff(a, b) { return ((a - b + 540) % 360) - 180; }
 
+      // 2D Spatial Hit Map for zero-latency, 100% accurate flower click resolution
+      var flowerHitGrid = new Array(ROWS);
+      for (var fgr = 0; fgr < ROWS; fgr++) flowerHitGrid[fgr] = new Array(COLS).fill(null);
+
       function makeGrid() {
         var g = new Array(ROWS);
-        for (var r = 0; r < ROWS; r++) g[r] = new Array(COLS).fill(null);
+        for (var r = 0; r < ROWS; r++) {
+          g[r] = new Array(COLS).fill(null);
+          flowerHitGrid[r].fill(null);
+        }
         return g;
       }
-      function plot(g, col, row, ch, cls) {
+
+      var activeFlower = null;
+      function plot(g, col, row, ch, cls, flowerId) {
         col = Math.round(col); row = Math.round(row);
         if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return;
-        g[row][col] = { ch: ch, cls: cls };
+        var fid = flowerId || activeFlower || null;
+        var finalCls = cls;
+        if (fid) {
+          if (fid === 'wp') finalCls = 'fl-wp flower-peony ' + cls;
+          else if (fid === 'la') finalCls = 'fl-la flower-aster ' + cls;
+          else if (fid === 'bp') finalCls = 'fl-bp flower-rose ' + cls;
+          else if (fid === 'gb') finalCls = 'fl-gb flower-buttercup ' + cls;
+          else if (fid === 'pb') finalCls = 'fl-pb flower-plum ' + cls;
+          else if (fid === 'rb') finalCls = 'fl-rb flower-wrap ' + cls;
+          flowerHitGrid[row][col] = fid;
+        }
+        g[row][col] = { ch: ch, cls: finalCls, flower: fid };
       }
 
-      // ---------- solid-fill petal painter (cupped rounded lobe with soft fading boundary) ----------
+      // ---------- solid-fill petal painter with lookup table & early reject ----------
       function paintPetal(g, cx, cy, angle, length, widthDeg, bend, cls, roundness) {
-        var halfW = widthDeg / 2;
-        var bendStart = length * 0.58, bendSpan = length * 0.42;
+        var halfW = widthDeg * 0.5;
+        var invHalfW = 1 / halfW;
+        var bendStart = length * 0.58, invBendSpan = 1 / (length * 0.42);
         var padR = length * 1.08;
-        var pts = [
-          [angle, padR], [angle - halfW, padR], [angle + halfW, padR],
-          [angle - halfW + bend, padR * 1.05], [angle + halfW + bend, padR * 1.05], [angle + bend, padR * 1.05]
-        ];
-        var minC = cx, maxC = cx, minR = cy, maxR = cy;
-        for (var p = 0; p < pts.length; p++) {
-          var a = pts[p][0] * Math.PI / 180;
-          var x = cx + Math.cos(a) * pts[p][1];
-          var y = cy - Math.sin(a) * ASPECT * pts[p][1];
-          if (x < minC) minC = x; if (x > maxC) maxC = x;
-          if (y < minR) minR = y; if (y > maxR) maxR = y;
-        }
+        var padR2 = padR * padR;
+
+        var a0 = (angle - halfW) * Math.PI / 180;
+        var a1 = (angle + halfW) * Math.PI / 180;
+        var a2 = (angle + bend) * Math.PI / 180;
+        var a3 = (angle - halfW + bend) * Math.PI / 180;
+        var a4 = (angle + halfW + bend) * Math.PI / 180;
+
+        var x0 = cx + Math.cos(a0) * padR, y0 = cy - Math.sin(a0) * ASPECT * padR;
+        var x1 = cx + Math.cos(a1) * padR, y1 = cy - Math.sin(a1) * ASPECT * padR;
+        var x2 = cx + Math.cos(a2) * padR, y2 = cy - Math.sin(a2) * ASPECT * padR;
+        var x3 = cx + Math.cos(a3) * padR, y3 = cy - Math.sin(a3) * ASPECT * padR;
+        var x4 = cx + Math.cos(a4) * padR, y4 = cy - Math.sin(a4) * ASPECT * padR;
+
+        var minC = Math.min(cx, x0, x1, x2, x3, x4);
+        var maxC = Math.max(cx, x0, x1, x2, x3, x4);
+        var minR = Math.min(cy, y0, y1, y2, y3, y4);
+        var maxR = Math.max(cy, y0, y1, y2, y3, y4);
+
         var c0 = Math.max(0, Math.floor(minC) - 1), c1 = Math.min(COLS - 1, Math.ceil(maxC) + 1);
         var r0 = Math.max(0, Math.floor(minR) - 1), r1 = Math.min(ROWS - 1, Math.ceil(maxR) + 1);
         var pow = roundness || 1;
 
         for (var row = r0; row <= r1; row++) {
+          var dy = row - cy;
+          if (dy < -LUT_OFFSET || dy > LUT_OFFSET) continue;
+          var dyMath = -dy / ASPECT;
+          var dyMath2 = dyMath * dyMath;
+          if (dyMath2 > padR2) continue;
+          var lutRow = (dy + LUT_OFFSET) * LUT_SIZE;
+
           for (var col = c0; col <= c1; col++) {
-            var dx = col - cx, dy = row - cy;
+            var dx = col - cx;
             if (dx === 0 && dy === 0) continue;
-            var dyMath = -dy / ASPECT;
-            var r = Math.sqrt(dx * dx + dyMath * dyMath);
-            if (r > length * 1.1) continue;
-            var ang = Math.atan2(dyMath, dx) * 180 / Math.PI;
+            if (dx < -LUT_OFFSET || dx > LUT_OFFSET) continue;
+            var r2 = dx * dx + dyMath2;
+            if (r2 > padR2) continue;
+
+            var lutIdx = lutRow + (dx + LUT_OFFSET);
+            var r = DIST_LUT[lutIdx];
+            var ang = ATAN2_LUT[lutIdx];
             var eff = angle;
             if (bend && r > bendStart) {
-              eff = angle + bend * Math.min(1, (r - bendStart) / bendSpan);
+              eff = angle + bend * Math.min(1, (r - bendStart) * invBendSpan);
             }
             var aoff = Math.abs(angleDiff(ang, eff));
             if (aoff > halfW) continue;
-            var taperT = Math.pow(aoff / halfW, pow);
-            var boundary = length * (0.55 + 0.45 * Math.cos(taperT * Math.PI / 2));
+            var taperT = Math.pow(aoff * invHalfW, pow);
+            var boundary = length * (0.55 + 0.45 * Math.cos(taperT * 1.5707963));
             if (r > boundary) continue;
             var nearRim = r / boundary;
-            var ch;
-            if (nearRim > 0.92) ch = '.';
-            else if (nearRim > 0.8) ch = (seeded(row * 311 + col) > 0.35) ? dirChar(dx, dy) : ',';
-            else ch = dirChar(dx, dy);
+            var ch = (nearRim > 0.92) ? '.' : ((nearRim > 0.8 && ((row * 311 + col) & 7) === 0) ? ',' : DIR_CHAR_LUT[lutIdx]);
             plot(g, col, row, ch, cls);
           }
         }
       }
 
-      // ---------- needle petal painter for Aster/Dahlia ----------
+      // ---------- needle petal painter for Aster with lookup table & early reject ----------
       function paintNeedlePetal(g, cx, cy, angle, length, widthDeg, bend, cls) {
-        var halfW = Math.max(1.8, widthDeg / 2);
+        var halfW = Math.max(1.8, widthDeg * 0.5);
+        var invHalfW = 1 / halfW;
+        var invLen = 1 / length;
         var padR = length * 1.06;
+        var padR2 = padR * padR;
         var rad = angle * Math.PI / 180;
         var radB = (angle + bend) * Math.PI / 180;
         var x1 = cx + Math.cos(rad) * padR, y1 = cy - Math.sin(rad) * ASPECT * padR;
@@ -563,20 +1028,30 @@
         var maxR = Math.min(ROWS - 1, Math.ceil(Math.max(cy, y1, y2) + halfW * ASPECT) + 1);
 
         for (var row = minR; row <= maxR; row++) {
+          var dy = row - cy;
+          if (dy < -LUT_OFFSET || dy > LUT_OFFSET) continue;
+          var dyMath = -dy / ASPECT;
+          var dyMath2 = dyMath * dyMath;
+          if (dyMath2 > padR2) continue;
+          var lutRow = (dy + LUT_OFFSET) * LUT_SIZE;
+
           for (var col = minC; col <= maxC; col++) {
-            var dx = col - cx, dy = row - cy;
+            var dx = col - cx;
             if (dx === 0 && dy === 0) continue;
-            var dyMath = -dy / ASPECT;
-            var r = Math.sqrt(dx * dx + dyMath * dyMath);
-            if (r > length * 1.06) continue;
-            var ang = Math.atan2(dyMath, dx) * 180 / Math.PI;
-            var eff = angle + (bend ? bend * (r / length) : 0);
+            if (dx < -LUT_OFFSET || dx > LUT_OFFSET) continue;
+            var r2 = dx * dx + dyMath2;
+            if (r2 > padR2) continue;
+
+            var lutIdx = lutRow + (dx + LUT_OFFSET);
+            var r = DIST_LUT[lutIdx];
+            var ang = ATAN2_LUT[lutIdx];
+            var eff = angle + (bend ? bend * (r * invLen) : 0);
             var aoff = Math.abs(angleDiff(ang, eff));
             if (aoff > halfW) continue;
-            var taperT = aoff / halfW;
-            var boundary = length * Math.cos(taperT * Math.PI / 2);
+            var taperT = aoff * invHalfW;
+            var boundary = length * Math.cos(taperT * 1.5707963);
             if (r > boundary) continue;
-            var ch = (r / boundary > 0.88) ? '.' : dirChar(dx, dy);
+            var ch = (r / boundary > 0.88) ? '.' : DIR_CHAR_LUT[lutIdx];
             plot(g, col, row, ch, cls);
           }
         }
@@ -670,11 +1145,14 @@
         }
       }
 
-      // ---------- BUILD STATIC FLOWER SPECS ONCE AT STARTUP ----------
-      // 1. Central White Peony
+      // =========================================================================
+      // FLOWER SPECS: (A) BOUQUET SPECS & (B) FULL 360° COMPLETE SPECIMEN SPECS
+      // =========================================================================
+
+      // 1. White Peony (Central Hero Bloom)
       var WP_SWEEP = 316, WP_START = -68;
       var wpOuterSpec = [], wpMidSpec = [], wpInnerSpec = [], wpStamenSpec = [];
-      var WP_OUTER = 32, WP_MID = 36, WP_INNER = 34, WP_STAMENS = 68;
+      var WP_OUTER = 22, WP_MID = 24, WP_INNER = 22, WP_STAMENS = 36;
       var WP_OUTER_W = (WP_SWEEP / WP_OUTER) * 2.5;
       var WP_MID_W = (WP_SWEEP / WP_MID) * 2.5;
       var WP_INNER_W = (WP_SWEEP / WP_INNER) * 2.4;
@@ -706,9 +1184,35 @@
         wpStamenSpec.push({ a: angk, l: lenk });
       }
 
+      // --- Complete 360° White Peony Spec (for inspection mode) ---
+      var wpFullOuter = [], wpFullMid = [], wpFullInner = [], wpFullStamen = [];
+      var WP_F_OUTER = 38, WP_F_MID = 42, WP_F_INNER = 38, WP_F_STAMENS = 80;
+      for (var f1 = 0; f1 < WP_F_OUTER; f1++) {
+        var angF = -180 + (f1 / WP_F_OUTER) * 360 + (seeded(f1 + 2000) - 0.5) * 3.5;
+        var lenF = 35 + seeded(f1 + 2100) * 8;
+        var bendF = (seeded(f1 + 2050) > 0.5 ? 1 : -1) * (5 + seeded(f1 + 2150) * 4);
+        wpFullOuter.push({ a: angF, l: lenF, bend: bendF });
+      }
+      for (var f2 = 0; f2 < WP_F_MID; f2++) {
+        var angF2 = -180 + (f2 / WP_F_MID) * 360 + (seeded(f2 + 2200) - 0.5) * 3.5;
+        var lenF2 = 24 + seeded(f2 + 2300) * 7;
+        var bendF2 = (seeded(f2 + 2250) > 0.5 ? 1 : -1) * (3 + seeded(f2 + 2350) * 3);
+        wpFullMid.push({ a: angF2, l: lenF2, bend: bendF2 });
+      }
+      for (var f3 = 0; f3 < WP_F_INNER; f3++) {
+        var angF3 = -180 + (f3 / WP_F_INNER) * 360 + (seeded(f3 + 2400) - 0.5) * 4;
+        var lenF3 = 14 + seeded(f3 + 2500) * 6;
+        wpFullInner.push({ a: angF3, l: lenF3 });
+      }
+      for (var f4 = 0; f4 < WP_F_STAMENS; f4++) {
+        var angF4 = -180 + (f4 / WP_F_STAMENS) * 360 + (seeded(f4 + 2600) - 0.5) * 5;
+        var lenF4 = 6 + seeded(f4 + 2700) * 5;
+        wpFullStamen.push({ a: angF4, l: lenF4 });
+      }
+
       // 2. Lavender Aster (Upper-Left)
       var laOuterSpec = [], laInnerSpec = [], laCoreSpec = [];
-      var LA_OUTER = 44, LA_INNER = 36, LA_CORE = 40;
+      var LA_OUTER = 24, LA_INNER = 22, LA_CORE = 24;
       for (var a1 = 0; a1 < LA_OUTER; a1++) {
         var tA = a1 / LA_OUTER;
         var angA = -180 + tA * 360 + (seeded(a1 + 10) - 0.5) * 4;
@@ -732,7 +1236,7 @@
       // 3. Blush Coral Rose (Upper-Right)
       var bpOuterSpec = [], bpMidSpec = [], bpInnerSpec = [], bpStamenSpec = [];
       var BP_SWEEP = 310, BP_START = -65;
-      var BP_OUTER = 26, BP_MID = 28, BP_INNER = 24, BP_STAMENS = 46;
+      var BP_OUTER = 18, BP_MID = 20, BP_INNER = 18, BP_STAMENS = 24;
       var BP_OUTER_W = (BP_SWEEP / BP_OUTER) * 2.5;
       var BP_MID_W = (BP_SWEEP / BP_MID) * 2.5;
       var BP_INNER_W = (BP_SWEEP / BP_INNER) * 2.4;
@@ -764,10 +1268,36 @@
         bpStamenSpec.push({ a: angB4, l: lenB4 });
       }
 
+      // --- Complete 360° Blush Coral Rose Spec ---
+      var bpFullOuter = [], bpFullMid = [], bpFullInner = [], bpFullStamen = [];
+      var BP_F_OUTER = 32, BP_F_MID = 34, BP_F_INNER = 30, BP_F_STAMENS = 56;
+      for (var fb1 = 0; fb1 < BP_F_OUTER; fb1++) {
+        var angFB = -180 + (fb1 / BP_F_OUTER) * 360 + (seeded(fb1 + 3000) - 0.5) * 4;
+        var lenFB = 26 + seeded(fb1 + 3100) * 6;
+        var bendFB = (seeded(fb1 + 3050) > 0.5 ? 1 : -1) * (4 + seeded(fb1 + 3150) * 4);
+        bpFullOuter.push({ a: angFB, l: lenFB, bend: bendFB });
+      }
+      for (var fb2 = 0; fb2 < BP_F_MID; fb2++) {
+        var angFB2 = -180 + (fb2 / BP_F_MID) * 360 + (seeded(fb2 + 3200) - 0.5) * 4;
+        var lenFB2 = 18 + seeded(fb2 + 3300) * 5;
+        var bendFB2 = (seeded(fb2 + 3250) > 0.5 ? 1 : -1) * (2 + seeded(fb2 + 3350) * 3);
+        bpFullMid.push({ a: angFB2, l: lenFB2, bend: bendFB2 });
+      }
+      for (var fb3 = 0; fb3 < BP_F_INNER; fb3++) {
+        var angFB3 = -180 + (fb3 / BP_F_INNER) * 360 + (seeded(fb3 + 3400) - 0.5) * 4;
+        var lenFB3 = 11 + seeded(fb3 + 3450) * 4;
+        bpFullInner.push({ a: angFB3, l: lenFB3 });
+      }
+      for (var fb4 = 0; fb4 < BP_F_STAMENS; fb4++) {
+        var angFB4 = -180 + (fb4 / BP_F_STAMENS) * 360 + (seeded(fb4 + 3500) - 0.5) * 5;
+        var lenFB4 = 5 + seeded(fb4 + 3550) * 4;
+        bpFullStamen.push({ a: angFB4, l: lenFB4 });
+      }
+
       // 4. Golden Ranunculus (Lower-Left)
       var gbOuterSpec = [], gbMidSpec = [], gbInnerSpec = [];
       var GB_SWEEP = 300, GB_START = -60;
-      var GB_OUTER = 22, GB_MID = 24, GB_INNER = 22;
+      var GB_OUTER = 18, GB_MID = 20, GB_INNER = 18;
       var GB_OUTER_W = (GB_SWEEP / GB_OUTER) * 2.6;
       var GB_MID_W = (GB_SWEEP / GB_MID) * 2.5;
       var GB_INNER_W = (GB_SWEEP / GB_INNER) * 2.4;
@@ -791,10 +1321,29 @@
         gbInnerSpec.push({ a: angG3, l: lenG3 });
       }
 
+      // --- Complete 360° Golden Ranunculus Spec ---
+      var gbFullOuter = [], gbFullMid = [], gbFullInner = [];
+      var GB_F_OUTER = 28, GB_F_MID = 30, GB_F_INNER = 26;
+      for (var fg1 = 0; fg1 < GB_F_OUTER; fg1++) {
+        var angFG = -180 + (fg1 / GB_F_OUTER) * 360 + (seeded(fg1 + 3600) - 0.5) * 4;
+        var lenFG = 20 + seeded(fg1 + 3650) * 5;
+        gbFullOuter.push({ a: angFG, l: lenFG, bend: (seeded(fg1 + 3620) > 0.5 ? 1 : -1) * 3 });
+      }
+      for (var fg2 = 0; fg2 < GB_F_MID; fg2++) {
+        var angFG2 = -180 + (fg2 / GB_F_MID) * 360 + (seeded(fg2 + 3700) - 0.5) * 4;
+        var lenFG2 = 14 + seeded(fg2 + 3750) * 4;
+        gbFullMid.push({ a: angFG2, l: lenFG2 });
+      }
+      for (var fg3 = 0; fg3 < GB_F_INNER; fg3++) {
+        var angFG3 = -180 + (fg3 / GB_F_INNER) * 360 + (seeded(fg3 + 3800) - 0.5) * 4;
+        var lenFG3 = 8 + seeded(fg3 + 3850) * 3;
+        gbFullInner.push({ a: angFG3, l: lenFG3 });
+      }
+
       // 5. Plum Blossom (Lower-Right)
       var pbOuterSpec = [], pbInnerSpec = [], pbStamenSpec = [];
       var PB_SWEEP = 310, PB_START = -65;
-      var PB_OUTER = 20, PB_INNER = 22, PB_STAMENS = 34;
+      var PB_OUTER = 14, PB_INNER = 14, PB_STAMENS = 18;
       var PB_OUTER_W = (PB_SWEEP / PB_OUTER) * 2.6;
       var PB_INNER_W = (PB_SWEEP / PB_INNER) * 2.4;
 
@@ -815,6 +1364,25 @@
         var angP3 = PB_START + 10 + tp3 * (PB_SWEEP - 20) + (seeded(p3 + 1600) - 0.5) * 5;
         var lenP3 = 4 + seeded(p3 + 1650) * 3;
         pbStamenSpec.push({ a: angP3, l: lenP3 });
+      }
+
+      // --- Complete 360° Plum Blossom Spec ---
+      var pbFullOuter = [], pbFullInner = [], pbFullStamen = [];
+      var PB_F_OUTER = 26, PB_F_INNER = 26, PB_F_STAMENS = 42;
+      for (var fp1 = 0; fp1 < PB_F_OUTER; fp1++) {
+        var angFP = -180 + (fp1 / PB_F_OUTER) * 360 + (seeded(fp1 + 3900) - 0.5) * 4;
+        var lenFP = 19 + seeded(fp1 + 3950) * 4;
+        pbFullOuter.push({ a: angFP, l: lenFP, bend: (seeded(fp1 + 3920) > 0.5 ? 1 : -1) * 3 });
+      }
+      for (var fp2 = 0; fp2 < PB_F_INNER; fp2++) {
+        var angFP2 = -180 + (fp2 / PB_F_INNER) * 360 + (seeded(fp2 + 4000) - 0.5) * 4;
+        var lenFP2 = 12 + seeded(fp2 + 4050) * 3;
+        pbFullInner.push({ a: angFP2, l: lenFP2 });
+      }
+      for (var fp3 = 0; fp3 < PB_F_STAMENS; fp3++) {
+        var angFP3 = -180 + (fp3 / PB_F_STAMENS) * 360 + (seeded(fp3 + 4100) - 0.5) * 5;
+        var lenFP3 = 5 + seeded(fp3 + 4150) * 3;
+        pbFullStamen.push({ a: angFP3, l: lenFP3 });
       }
 
       // Sprig definitions
@@ -853,8 +1421,8 @@
       }
 
       // Interaction variables
-      var pointerCol = GATHER_X, pointerRow = 46;
-      var targetPointerCol = GATHER_X, targetPointerRow = 46;
+      var pointerCol = -9999, pointerRow = -9999;
+      var targetPointerCol = -9999, targetPointerRow = -9999;
       var tilt = 0, targetTilt = 0;
       var pulseStart = -9999;
       var pulseCol = GATHER_X, pulseRow = 46;
@@ -862,11 +1430,66 @@
       var anchorEl = document.getElementById('anchor');
       var bloomEl = document.getElementById('bloom');
 
+      // Specimen identifiers & theme colors for biology diagram
+      var specimenIds = ['wp', 'la', 'bp', 'gb', 'pb', 'rb'];
+      var specimenThemeColors = {
+        wp: '#fffaf3',
+        la: '#c7a8f8',
+        bp: '#ff98a7',
+        gb: '#ffd584',
+        pb: '#ea6fa2',
+        rb: '#ff9fb0'
+      };
+
+      // Click-selected specimen (strictly null until a flower is clicked)
+      var selectedSpecimenId = null;
+
+      function updateSpecimenUI(selectedId) {
+        if (selectedId) {
+          bloomEl.className = 'has-focus focus-' + selectedId;
+        } else {
+          bloomEl.className = '';
+        }
+
+        for (var i = 0; i < specimenIds.length; i++) {
+          var sid = specimenIds[i];
+          var cardEl = document.getElementById('card-' + sid);
+          if (cardEl) {
+            if (sid === selectedId) cardEl.classList.add('active');
+            else cardEl.classList.remove('active');
+          }
+        }
+      }
+
+      // Deselect specimen when close button or empty space is clicked
+      window.deselectSpecimen = function (e) {
+        if (e) e.stopPropagation();
+        selectedSpecimenId = null;
+        updateSpecimenUI(null);
+      };
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' || e.key === 'Esc') {
+          selectedSpecimenId = null;
+          updateSpecimenUI(null);
+        }
+      });
+
       // ---------- RENDER LOOP ----------
       function render(now) {
         // Pointer smoothing
-        pointerCol += (targetPointerCol - pointerCol) * 0.08;
-        pointerRow += (targetPointerRow - pointerRow) * 0.08;
+        if (targetPointerCol > -9000) {
+          if (pointerCol < -9000) {
+            pointerCol = targetPointerCol;
+            pointerRow = targetPointerRow;
+          } else {
+            pointerCol += (targetPointerCol - pointerCol) * 0.18;
+            pointerRow += (targetPointerRow - pointerRow) * 0.18;
+          }
+        } else {
+          pointerCol = -9999;
+          pointerRow = -9999;
+        }
         tilt += (targetTilt - tilt) * 0.05;
 
         // Ambient wind & container sway
@@ -892,7 +1515,7 @@
           var dx = pointerCol - f.cx;
           var dyMath = -(pointerRow - f.cy) / ASPECT;
           var dist = Math.sqrt(dx * dx + dyMath * dyMath);
-          var inf = Math.max(0, 1 - dist / hoverR);
+          var inf = (pointerCol > -9000) ? Math.max(0, 1 - dist / hoverR) : 0;
           var angle = Math.atan2(dyMath, dx) * 180 / Math.PI;
 
           // Pulse wave hit
@@ -910,6 +1533,9 @@
         var infBP = getFlowerInfluence(F_BP, 40);
         var infGB = getFlowerInfluence(F_GB, 34);
         var infPB = getFlowerInfluence(F_PB, 34);
+
+        var bowDist = Math.hypot(pointerCol - GATHER_X, (pointerRow - GATHER_Y) / ASPECT);
+        var bowInf = (pointerCol > -9000) ? Math.max(0, 1 - bowDist / 26) : 0;
 
         // ==========================================
         // LAYER 1: BACKGROUND LEAVES & FOLIAGE
@@ -933,56 +1559,61 @@
 
         // ==========================================
         // LAYER 3: REAR FLOWERS (Lavender Aster & Plum Blossom)
+        // (If selected, skipped here so complete 360° bloom draws on top in Layer 9!)
         // ==========================================
-        // --- Lavender Aster ---
-        var laHot = infLA.inf > 0.42;
-        var laPulse = infLA.pulse;
-        laOuterSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.0011 + idx * 0.8) * 1.1;
-          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infLA.angle)) / 45);
-          var len = p.l + breathe * 0.7 + wobble + laPulse + dirInf * infLA.inf * 3.8;
-          var cls = 'la-o' + ((laHot || dirInf * infLA.inf > 0.4) ? ' hot' : '');
-          paintNeedlePetal(g, F_LA.cx, F_LA.cy, p.a + wobble * 0.2, len, 12, p.bend, cls);
-        });
-        laInnerSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.0014 + idx * 1.1) * 0.9;
-          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infLA.angle)) / 40);
-          var len = p.l + breathe * 0.5 + wobble + laPulse * 0.8 + dirInf * infLA.inf * 2.8;
-          var cls = 'la-i' + ((laHot || dirInf * infLA.inf > 0.4) ? ' hot' : '');
-          paintNeedlePetal(g, F_LA.cx, F_LA.cy, p.a + wobble * 0.25, len, 11, 0, cls);
-        });
-        laCoreSpec.forEach(function (p, idx) {
-          var len = p.l + Math.sin(now * 0.0018 + idx) * 0.4;
-          strokeStamen(g, F_LA.cx, F_LA.cy, p.a, len, 'la-st' + (laHot ? ' hot' : ''));
-        });
-        plot(g, F_LA.cx, F_LA.cy, '*', 'la-st' + (laHot ? ' hot' : ''));
+        if (selectedSpecimenId !== 'la') {
+          activeFlower = 'la';
+          var laHot = infLA.inf > 0.42;
+          var laPulse = infLA.pulse;
+          laOuterSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0011 + idx * 0.8) * 1.1;
+            var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infLA.angle)) / 45);
+            var len = p.l + breathe * 0.7 + wobble + laPulse + dirInf * infLA.inf * 3.8;
+            var cls = 'la-o' + ((laHot || dirInf * infLA.inf > 0.4) ? ' hot' : '');
+            paintNeedlePetal(g, F_LA.cx, F_LA.cy, p.a + wobble * 0.2, len, 12, p.bend, cls);
+          });
+          laInnerSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0014 + idx * 1.1) * 0.9;
+            var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infLA.angle)) / 40);
+            var len = p.l + breathe * 0.5 + wobble + laPulse * 0.8 + dirInf * infLA.inf * 2.8;
+            var cls = 'la-i' + ((laHot || dirInf * infLA.inf > 0.4) ? ' hot' : '');
+            paintNeedlePetal(g, F_LA.cx, F_LA.cy, p.a + wobble * 0.25, len, 11, 0, cls);
+          });
+          laCoreSpec.forEach(function (p, idx) {
+            var len = p.l + Math.sin(now * 0.0018 + idx) * 0.4;
+            strokeStamen(g, F_LA.cx, F_LA.cy, p.a, len, 'la-st' + (laHot ? ' hot' : ''));
+          });
+          plot(g, F_LA.cx, F_LA.cy, '*', 'la-st' + (laHot ? ' hot' : ''));
+        }
 
-        // --- Plum Blossom (Lower-Right Rear) ---
-        var pbHot = infPB.inf > 0.42;
-        var pbPulse = infPB.pulse;
-        pbOuterSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.001 + idx * 0.9) * 0.8;
-          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infPB.angle)) / 45);
-          var len = p.l + breathe * 0.6 + wobble + pbPulse + dirInf * infPB.inf * 3.0;
-          var cls = 'pb-o' + ((pbHot || dirInf * infPB.inf > 0.4) ? ' hot' : '');
-          paintPetal(g, F_PB.cx, F_PB.cy, p.a + wobble * 0.2, len, PB_OUTER_W, p.bend, cls, 1.2);
-        });
-        pbInnerSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.0013 + idx * 1.2) * 0.7;
-          var len = p.l + breathe * 0.4 + wobble + pbPulse * 0.7;
-          var cls = 'pb-i' + (pbHot ? ' hot' : '');
-          paintPetal(g, F_PB.cx, F_PB.cy, p.a + wobble * 0.25, len, PB_INNER_W, 0, cls, 1.4);
-        });
-        pbStamenSpec.forEach(function (p, idx) {
-          var len = p.l + Math.sin(now * 0.0016 + idx) * 0.3;
-          strokeStamen(g, F_PB.cx, F_PB.cy, p.a, len, 'pb-st' + (pbHot ? ' hot' : ''));
-        });
-        plot(g, F_PB.cx, F_PB.cy, 'o', 'pb-st' + (pbHot ? ' hot' : ''));
+        if (selectedSpecimenId !== 'pb') {
+          activeFlower = 'pb';
+          var pbHot = infPB.inf > 0.42;
+          var pbPulse = infPB.pulse;
+          pbOuterSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.001 + idx * 0.9) * 0.8;
+            var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infPB.angle)) / 45);
+            var len = p.l + breathe * 0.6 + wobble + pbPulse + dirInf * infPB.inf * 3.0;
+            var cls = 'pb-o' + ((pbHot || dirInf * infPB.inf > 0.4) ? ' hot' : '');
+            paintPetal(g, F_PB.cx, F_PB.cy, p.a + wobble * 0.2, len, PB_OUTER_W, p.bend, cls, 1.2);
+          });
+          pbInnerSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0013 + idx * 1.2) * 0.7;
+            var len = p.l + breathe * 0.4 + wobble + pbPulse * 0.7;
+            var cls = 'pb-i' + (pbHot ? ' hot' : '');
+            paintPetal(g, F_PB.cx, F_PB.cy, p.a + wobble * 0.25, len, PB_INNER_W, 0, cls, 1.4);
+          });
+          pbStamenSpec.forEach(function (p, idx) {
+            var len = p.l + Math.sin(now * 0.0016 + idx) * 0.3;
+            strokeStamen(g, F_PB.cx, F_PB.cy, p.a, len, 'pb-st' + (pbHot ? ' hot' : ''));
+          });
+          plot(g, F_PB.cx, F_PB.cy, 'o', 'pb-st' + (pbHot ? ' hot' : ''));
+        }
 
         // ==========================================
         // LAYER 4: KRAFT WRAP BACK FOLDS
         // ==========================================
-        // Back folds behind the front focal flowers
+        activeFlower = 'rb';
         for (var wy = 56; wy <= GATHER_Y; wy++) {
           var tWrap = (wy - 56) / (GATHER_Y - 56);
           var leftEdge = 48 + tWrap * 38;
@@ -996,112 +1627,120 @@
         }
 
         // Mid leaves branching out over the wrap
+        activeFlower = null;
         paintLeaf(g, 62, 60, 215, 14, 7, 'lf-f', 'lf-v', 0.15); // Flanking left wrap rim
         paintLeaf(g, 122, 60, -35, 14, 7, 'lf-f', 'lf-v', -0.15); // Flanking right wrap rim
 
         // ==========================================
         // LAYER 5: FOREGROUND FLOWERS (Blush Rose, Buttercup, White Peony)
+        // (If selected, skipped here so complete 360° bloom draws on top in Layer 9!)
         // ==========================================
-        // --- Blush Coral Rose (Upper-Right) ---
-        var bpHot = infBP.inf > 0.42;
-        var bpPulse = infBP.pulse;
-        bpOuterSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.00095 + idx * 0.8) * 1.1;
-          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infBP.angle)) / 44);
-          var len = p.l + breathe * 0.8 + wobble + bpPulse + dirInf * infBP.inf * 3.6;
-          var cls = 'bp-o' + ((bpHot || dirInf * infBP.inf > 0.4) ? ' hot' : '');
-          paintPetal(g, F_BP.cx, F_BP.cy, p.a + wobble * 0.25, len, BP_OUTER_W, p.bend, cls, 1.1);
-        });
-        bpMidSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.0011 + idx * 1.1) * 0.9;
-          var len = p.l + breathe * 0.6 + wobble + bpPulse * 0.8;
-          var cls = 'bp-m' + (bpHot ? ' hot' : '');
-          paintPetal(g, F_BP.cx, F_BP.cy, p.a + wobble * 0.3, len, BP_MID_W, p.bend, cls, 1.3);
-        });
-        bpInnerSpec.forEach(function (p, idx) {
-          var len = p.l + breathe * 0.4 + bpPulse * 0.6;
-          var cls = 'bp-i' + (bpHot ? ' hot' : '');
-          paintPetal(g, F_BP.cx, F_BP.cy, p.a, len, BP_INNER_W, 0, cls, 1.5);
-        });
-        bpStamenSpec.forEach(function (p, idx) {
-          var len = p.l + Math.sin(now * 0.0015 + idx) * 0.4;
-          strokeStamen(g, F_BP.cx, F_BP.cy, p.a, len, 'bp-st' + (bpHot ? ' hot' : ''));
-        });
-        plot(g, F_BP.cx, F_BP.cy, '*', 'bp-st' + (bpHot ? ' hot' : ''));
+        if (selectedSpecimenId !== 'bp') {
+          activeFlower = 'bp';
+          var bpHot = infBP.inf > 0.42;
+          var bpPulse = infBP.pulse;
+          bpOuterSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.00095 + idx * 0.8) * 1.1;
+            var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infBP.angle)) / 44);
+            var len = p.l + breathe * 0.8 + wobble + bpPulse + dirInf * infBP.inf * 3.6;
+            var cls = 'bp-o' + ((bpHot || dirInf * infBP.inf > 0.4) ? ' hot' : '');
+            paintPetal(g, F_BP.cx, F_BP.cy, p.a + wobble * 0.25, len, BP_OUTER_W, p.bend, cls, 1.1);
+          });
+          bpMidSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0011 + idx * 1.1) * 0.9;
+            var len = p.l + breathe * 0.6 + wobble + bpPulse * 0.8;
+            var cls = 'bp-m' + (bpHot ? ' hot' : '');
+            paintPetal(g, F_BP.cx, F_BP.cy, p.a + wobble * 0.3, len, BP_MID_W, p.bend, cls, 1.3);
+          });
+          bpInnerSpec.forEach(function (p, idx) {
+            var len = p.l + breathe * 0.4 + bpPulse * 0.6;
+            var cls = 'bp-i' + (bpHot ? ' hot' : '');
+            paintPetal(g, F_BP.cx, F_BP.cy, p.a, len, BP_INNER_W, 0, cls, 1.5);
+          });
+          bpStamenSpec.forEach(function (p, idx) {
+            var len = p.l + Math.sin(now * 0.0015 + idx) * 0.4;
+            strokeStamen(g, F_BP.cx, F_BP.cy, p.a, len, 'bp-st' + (bpHot ? ' hot' : ''));
+          });
+          plot(g, F_BP.cx, F_BP.cy, '*', 'bp-st' + (bpHot ? ' hot' : ''));
+        }
 
-        // --- Golden Ranunculus (Lower-Left) ---
-        var gbHot = infGB.inf > 0.42;
-        var gbPulse = infGB.pulse;
-        gbOuterSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.001 + idx * 0.85) * 0.9;
-          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infGB.angle)) / 44);
-          var len = p.l + breathe * 0.7 + wobble + gbPulse + dirInf * infGB.inf * 3.2;
-          var cls = 'gb-o' + ((gbHot || dirInf * infGB.inf > 0.4) ? ' hot' : '');
-          paintPetal(g, F_GB.cx, F_GB.cy, p.a + wobble * 0.2, len, GB_OUTER_W, p.bend, cls, 1.2);
-        });
-        gbMidSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.0012 + idx * 1.1) * 0.8;
-          var len = p.l + breathe * 0.5 + wobble + gbPulse * 0.7;
-          var cls = 'gb-m' + (gbHot ? ' hot' : '');
-          paintPetal(g, F_GB.cx, F_GB.cy, p.a + wobble * 0.25, len, GB_MID_W, 0, cls, 1.4);
-        });
-        gbInnerSpec.forEach(function (p, idx) {
-          var len = p.l + breathe * 0.3 + gbPulse * 0.5;
-          var cls = 'gb-i' + (gbHot ? ' hot' : '');
-          paintPetal(g, F_GB.cx, F_GB.cy, p.a, len, GB_INNER_W, 0, cls, 1.6);
-        });
-        plot(g, F_GB.cx, F_GB.cy, 'o', 'gb-st');
+        if (selectedSpecimenId !== 'gb') {
+          activeFlower = 'gb';
+          var gbHot = infGB.inf > 0.42;
+          var gbPulse = infGB.pulse;
+          gbOuterSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.001 + idx * 0.85) * 0.9;
+            var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infGB.angle)) / 44);
+            var len = p.l + breathe * 0.7 + wobble + gbPulse + dirInf * infGB.inf * 3.2;
+            var cls = 'gb-o' + ((gbHot || dirInf * infGB.inf > 0.4) ? ' hot' : '');
+            paintPetal(g, F_GB.cx, F_GB.cy, p.a + wobble * 0.2, len, GB_OUTER_W, p.bend, cls, 1.2);
+          });
+          gbMidSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0012 + idx * 1.1) * 0.8;
+            var len = p.l + breathe * 0.5 + wobble + gbPulse * 0.7;
+            var cls = 'gb-m' + (gbHot ? ' hot' : '');
+            paintPetal(g, F_GB.cx, F_GB.cy, p.a + wobble * 0.25, len, GB_MID_W, 0, cls, 1.4);
+          });
+          gbInnerSpec.forEach(function (p, idx) {
+            var len = p.l + breathe * 0.3 + gbPulse * 0.5;
+            var cls = 'gb-i' + (gbHot ? ' hot' : '');
+            paintPetal(g, F_GB.cx, F_GB.cy, p.a, len, GB_INNER_W, 0, cls, 1.6);
+          });
+          plot(g, F_GB.cx, F_GB.cy, 'o', 'gb-st');
+        }
 
         // --- Central Stems connecting to White Peony & Gather Point ---
         drawStemCurve(g, F_WP.cx, F_WP.cy + 14, GATHER_X, GATHER_Y - 2, 0, 'tb');
         drawStemCurve(g, F_GB.cx, F_GB.cy + 10, GATHER_X - 4, GATHER_Y - 2, -6, 'tb');
         drawStemCurve(g, F_PB.cx, F_PB.cy + 10, GATHER_X + 4, GATHER_Y - 2, 6, 'tb');
 
-        // --- White Peony (Grand Focal Hero Bloom) ---
-        var wpHot = infWP.inf > 0.42;
-        var wpPulse = infWP.pulse;
-        wpOuterSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.0009 + idx * 0.7) * 1.3;
-          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infWP.angle)) / 46);
-          var len = p.l + breathe + wobble + wpPulse + dirInf * infWP.inf * 4.2;
-          var cls = 'wp-o' + ((wpHot || dirInf * infWP.inf > 0.4) ? ' hot' : '');
-          paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.25, len, WP_OUTER_W, p.bend, cls, 1.0);
-        });
-        wpMidSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.001 + idx * 1.1) * 1.0;
-          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infWP.angle)) / 42);
-          var len = p.l + breathe * 0.8 + wobble + wpPulse * 0.8 + dirInf * infWP.inf * 3.4;
-          var cls = 'wp-m' + ((wpHot || dirInf * infWP.inf > 0.4) ? ' hot' : '');
-          paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.3, len, WP_MID_W, p.bend, cls, 1.3);
-        });
-        wpInnerSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.0012 + idx * 1.4) * 0.8;
-          var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infWP.angle)) / 38);
-          var len = p.l + breathe * 0.5 + wobble + wpPulse * 0.6 + dirInf * infWP.inf * 2.6;
-          var cls = 'wp-i' + ((wpHot || dirInf * infWP.inf > 0.4) ? ' hot' : '');
-          paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.35, len, WP_INNER_W, 0, cls, 1.6);
-        });
-        wpStamenSpec.forEach(function (p, idx) {
-          var wobble = Math.sin(now * 0.0014 + idx * 1.8) * 0.5;
-          var len = p.l + wobble + wpPulse * 0.35;
-          var cls = 'wp-st' + (wpHot ? ' hot' : '');
-          strokeStamen(g, F_WP.cx, F_WP.cy, p.a, len, cls);
-        });
-
-        // Peony Carpels / Core
-        for (var ry = -3; ry <= 3; ry++) {
-          for (var rx = -5; rx <= 5; rx++) {
-            var dist = Math.sqrt(rx * rx * 0.75 + ry * ry * 1.7);
-            if (dist > 3.6) continue;
-            var ch = dist < 1.8 ? '*' : (Math.abs(rx) > Math.abs(ry) ? '-' : '|');
-            plot(g, F_WP.cx + rx, F_WP.cy + ry, ch, 'wp-sg');
+        // --- White Peony (Grand Focal Hero Bloom in Bouquet) ---
+        if (selectedSpecimenId !== 'wp') {
+          activeFlower = 'wp';
+          var wpHot = infWP.inf > 0.42;
+          var wpPulse = infWP.pulse;
+          wpOuterSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0009 + idx * 0.7) * 1.3;
+            var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infWP.angle)) / 46);
+            var len = p.l + breathe + wobble + wpPulse + dirInf * infWP.inf * 4.2;
+            var cls = 'wp-o' + ((wpHot || dirInf * infWP.inf > 0.4) ? ' hot' : '');
+            paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.25, len, WP_OUTER_W, p.bend, cls, 1.0);
+          });
+          wpMidSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.001 + idx * 1.1) * 1.0;
+            var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infWP.angle)) / 42);
+            var len = p.l + breathe * 0.8 + wobble + wpPulse * 0.8 + dirInf * infWP.inf * 3.4;
+            var cls = 'wp-m' + ((wpHot || dirInf * infWP.inf > 0.4) ? ' hot' : '');
+            paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.3, len, WP_MID_W, p.bend, cls, 1.3);
+          });
+          wpInnerSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0012 + idx * 1.4) * 0.8;
+            var dirInf = Math.max(0, 1 - Math.abs(angleDiff(p.a, infWP.angle)) / 38);
+            var len = p.l + breathe * 0.5 + wobble + wpPulse * 0.6 + dirInf * infWP.inf * 2.6;
+            var cls = 'wp-i' + ((wpHot || dirInf * infWP.inf > 0.4) ? ' hot' : '');
+            paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.35, len, WP_INNER_W, 0, cls, 1.6);
+          });
+          wpStamenSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0014 + idx * 1.8) * 0.5;
+            var len = p.l + wobble + wpPulse * 0.35;
+            var cls = 'wp-st' + (wpHot ? ' hot' : '');
+            strokeStamen(g, F_WP.cx, F_WP.cy, p.a, len, cls);
+          });
+          // Peony Carpels / Core
+          for (var ry = -3; ry <= 3; ry++) {
+            for (var rx = -5; rx <= 5; rx++) {
+              var dist = Math.sqrt(rx * rx * 0.75 + ry * ry * 1.7);
+              if (dist > 3.6) continue;
+              var ch = dist < 1.8 ? '*' : (Math.abs(rx) > Math.abs(ry) ? '-' : '|');
+              plot(g, F_WP.cx + rx, F_WP.cy + ry, ch, 'wp-sg');
+            }
           }
         }
 
         // ==========================================
         // LAYER 6: KRAFT WRAP FRONT COLLAR & STEM BUNDLE
         // ==========================================
-        // Stems extending cleanly below the gather point
+        activeFlower = null;
         for (var sy = GATHER_Y + 2; sy < ROWS - 4; sy++) {
           var sWidth = 4 - Math.round((sy - GATHER_Y) * 0.06);
           for (var sx = GATHER_X - sWidth; sx <= GATHER_X + sWidth; sx++) {
@@ -1121,13 +1760,13 @@
         }
 
         // Front folded collar wrapping around the bouquet gather
+        activeFlower = 'rb';
         var collarY0 = 65, collarY1 = GATHER_Y;
         for (var cy = collarY0; cy <= collarY1; cy++) {
           var tCollar = (cy - collarY0) / (collarY1 - collarY0);
           var leftWing = 66 + tCollar * 24;
           var rightWing = 118 - tCollar * 24;
           for (var cx = Math.round(leftWing); cx <= Math.round(rightWing); cx++) {
-            // diagonal origami fold lines
             var isLeftEdge = (cx <= leftWing + 1);
             var isRightEdge = (cx >= rightWing - 1);
             var isCrease = (Math.abs(cx - GATHER_X) === Math.round(tCollar * 8));
@@ -1140,8 +1779,8 @@
         // ==========================================
         // LAYER 7: RIBBON, KNOT, BOW LOOPS & FLUTTERING TAILS
         // ==========================================
-        var bowDist = Math.hypot(pointerCol - GATHER_X, (pointerRow - GATHER_Y) / ASPECT);
-        var bowHot = bowDist < 26;
+        activeFlower = 'rb';
+        var bowHot = bowInf > 0.4 || selectedSpecimenId === 'rb';
         var bowFlutter = Math.sin(now * 0.0035) * 1.5 + (bowHot ? Math.sin(now * 0.008) * 2.0 : 0);
 
         // Left Bow Loop
@@ -1186,7 +1825,7 @@
         // ==========================================
         // LAYER 8: LUMINOUS POLLEN / SPARKLES
         // ==========================================
-        // Occasional gentle ambient pollen drift
+        activeFlower = null;
         if (pollenParticles.length < 8 && Math.random() < 0.04) {
           var fList = [F_WP, F_LA, F_BP, F_GB, F_PB];
           var rf = fList[Math.floor(Math.random() * fList.length)];
@@ -1213,40 +1852,231 @@
           plot(g, part.x, part.y, part.ch, 'pol');
         }
 
-        // Render grid to pre tag
+        // ==========================================
+        // LAYER 9: CLICKED SPECIMEN (COMPLETE 360° BLOOM ON TOP OF EVERYTHING!)
+        // When clicked, renders the full, complete circular flower in place & orientation!
+        // ==========================================
+        activeFlower = selectedSpecimenId;
+        if (selectedSpecimenId === 'wp') {
+          // Complete 360° White Peony Bloom
+          wpFullOuter.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.001 + idx * 0.7) * 1.2;
+            var len = p.l + breathe + wobble + 2.5;
+            paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.25, len, 26, p.bend, 'wp-o hot', 1.0);
+          });
+          wpFullMid.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0012 + idx * 1.1) * 1.0;
+            var len = p.l + breathe * 0.8 + wobble + 2.0;
+            paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.3, len, 25, p.bend, 'wp-m hot', 1.3);
+          });
+          wpFullInner.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0014 + idx * 1.4) * 0.8;
+            var len = p.l + breathe * 0.5 + wobble + 1.5;
+            paintPetal(g, F_WP.cx, F_WP.cy, p.a + wobble * 0.35, len, 24, 0, 'wp-i hot', 1.6);
+          });
+          wpFullStamen.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0016 + idx * 1.8) * 0.5;
+            strokeStamen(g, F_WP.cx, F_WP.cy, p.a, p.l + wobble, 'wp-st hot');
+          });
+          for (var ry = -3; ry <= 3; ry++) {
+            for (var rx = -5; rx <= 5; rx++) {
+              var dist = Math.sqrt(rx * rx * 0.75 + ry * ry * 1.7);
+              if (dist > 3.6) continue;
+              var ch = dist < 1.8 ? '*' : (Math.abs(rx) > Math.abs(ry) ? '-' : '|');
+              plot(g, F_WP.cx + rx, F_WP.cy + ry, ch, 'wp-sg');
+            }
+          }
+        } else if (selectedSpecimenId === 'la') {
+          // Complete 360° Lavender Aster Starburst
+          laOuterSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0012 + idx * 0.8) * 1.2;
+            var len = p.l + breathe * 0.7 + wobble + 2.8;
+            paintNeedlePetal(g, F_LA.cx, F_LA.cy, p.a + wobble * 0.2, len, 12, p.bend, 'la-o hot');
+          });
+          laInnerSpec.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0015 + idx * 1.1) * 1.0;
+            var len = p.l + breathe * 0.5 + wobble + 2.0;
+            paintNeedlePetal(g, F_LA.cx, F_LA.cy, p.a + wobble * 0.25, len, 11, 0, 'la-i hot');
+          });
+          laCoreSpec.forEach(function (p, idx) {
+            var len = p.l + Math.sin(now * 0.0018 + idx) * 0.5;
+            strokeStamen(g, F_LA.cx, F_LA.cy, p.a, len, 'la-st hot');
+          });
+          plot(g, F_LA.cx, F_LA.cy, '*', 'la-st hot');
+        } else if (selectedSpecimenId === 'bp') {
+          // Complete 360° Blush Coral Rose Rosette
+          bpFullOuter.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.001 + idx * 0.8) * 1.1;
+            var len = p.l + breathe * 0.8 + wobble + 2.5;
+            paintPetal(g, F_BP.cx, F_BP.cy, p.a + wobble * 0.25, len, 28, p.bend, 'bp-o hot', 1.1);
+          });
+          bpFullMid.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0012 + idx * 1.1) * 0.9;
+            var len = p.l + breathe * 0.6 + wobble + 2.0;
+            paintPetal(g, F_BP.cx, F_BP.cy, p.a + wobble * 0.3, len, 26, p.bend, 'bp-m hot', 1.3);
+          });
+          bpFullInner.forEach(function (p, idx) {
+            var len = p.l + breathe * 0.4 + 1.5;
+            paintPetal(g, F_BP.cx, F_BP.cy, p.a, len, 25, 0, 'bp-i hot', 1.5);
+          });
+          bpFullStamen.forEach(function (p, idx) {
+            var len = p.l + Math.sin(now * 0.0015 + idx) * 0.4;
+            strokeStamen(g, F_BP.cx, F_BP.cy, p.a, len, 'bp-st hot');
+          });
+          plot(g, F_BP.cx, F_BP.cy, '*', 'bp-st hot');
+        } else if (selectedSpecimenId === 'gb') {
+          // Complete 360° Golden Ranunculus Rosette
+          gbFullOuter.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0011 + idx * 0.85) * 1.0;
+            var len = p.l + breathe * 0.7 + wobble + 2.2;
+            paintPetal(g, F_GB.cx, F_GB.cy, p.a + wobble * 0.2, len, 28, p.bend, 'gb-o hot', 1.2);
+          });
+          gbFullMid.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0013 + idx * 1.1) * 0.8;
+            var len = p.l + breathe * 0.5 + wobble + 1.8;
+            paintPetal(g, F_GB.cx, F_GB.cy, p.a + wobble * 0.25, len, 26, 0, 'gb-m hot', 1.4);
+          });
+          gbFullInner.forEach(function (p, idx) {
+            var len = p.l + breathe * 0.3 + 1.2;
+            paintPetal(g, F_GB.cx, F_GB.cy, p.a, len, 24, 0, 'gb-i hot', 1.6);
+          });
+          plot(g, F_GB.cx, F_GB.cy, 'o', 'gb-st');
+        } else if (selectedSpecimenId === 'pb') {
+          // Complete 360° Plum Blossom Rosette
+          pbFullOuter.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0011 + idx * 0.9) * 0.9;
+            var len = p.l + breathe * 0.6 + wobble + 2.0;
+            paintPetal(g, F_PB.cx, F_PB.cy, p.a + wobble * 0.2, len, 30, p.bend, 'pb-o hot', 1.2);
+          });
+          pbFullInner.forEach(function (p, idx) {
+            var wobble = Math.sin(now * 0.0014 + idx * 1.2) * 0.7;
+            var len = p.l + breathe * 0.4 + wobble + 1.6;
+            paintPetal(g, F_PB.cx, F_PB.cy, p.a + wobble * 0.25, len, 26, 0, 'pb-i hot', 1.4);
+          });
+          pbFullStamen.forEach(function (p, idx) {
+            var len = p.l + Math.sin(now * 0.0016 + idx) * 0.4;
+            strokeStamen(g, F_PB.cx, F_PB.cy, p.a, len, 'pb-st hot');
+          });
+          plot(g, F_PB.cx, F_PB.cy, 'o', 'pb-st hot');
+        }
+
+        activeFlower = null;
         bloomEl.innerHTML = gridToHtml(g);
+        syncLeaderLine();
         requestAnimationFrame(render);
       }
 
-      // ---------- SPAN RUN-LENGTH COMPRESSOR ----------
+      // Dynamic Botanical Biology Leader Line & Margin Card Positioning
+      function syncLeaderLine() {
+        if (!selectedSpecimenId) {
+          var diagGroup = document.getElementById('screenDiagGroup');
+          if (diagGroup) diagGroup.style.opacity = '0';
+          return;
+        }
+
+        var markerEl = document.getElementById('marker-' + selectedSpecimenId);
+        var cardEl = document.getElementById('card-' + selectedSpecimenId);
+        var diagGroup = document.getElementById('screenDiagGroup');
+        if (!markerEl || !cardEl || !diagGroup) return;
+
+        var mRect = markerEl.getBoundingClientRect();
+        var fx = mRect.left + mRect.width / 2;
+        var fy = mRect.top + mRect.height / 2;
+        var winW = window.innerWidth, winH = window.innerHeight;
+
+        var isLeft = cardEl.classList.contains('card-left');
+        if (winW > 850) {
+          var cardH = cardEl.offsetHeight || 160;
+          var targetTop = Math.max(16, Math.min(winH - cardH - 20, fy - cardH * 0.45));
+          cardEl.style.top = targetTop + 'px';
+        }
+
+        var cRect = cardEl.getBoundingClientRect();
+        var cx = isLeft ? (cRect.right + 10) : (cRect.left - 10);
+        var cy = cRect.top + cRect.height / 2;
+        var elbowX = isLeft ? Math.min(fx - 40, (fx + cx) * 0.5) : Math.max(fx + 40, (fx + cx) * 0.5);
+
+        var color = specimenThemeColors[selectedSpecimenId] || '#ffffff';
+        diagGroup.style.opacity = '1';
+
+        var reticleEl = document.getElementById('screenReticle');
+        var reticleDashEl = document.getElementById('screenReticleDashed');
+        var dotEl = document.getElementById('screenDot');
+        var lineEl = document.getElementById('screenLine');
+        var termEl = document.getElementById('screenTerminal');
+
+        reticleEl.setAttribute('cx', fx);
+        reticleEl.setAttribute('cy', fy);
+        reticleEl.setAttribute('stroke', color);
+
+        reticleDashEl.setAttribute('cx', fx);
+        reticleDashEl.setAttribute('cy', fy);
+        reticleDashEl.setAttribute('stroke', color);
+
+        dotEl.setAttribute('cx', fx);
+        dotEl.setAttribute('cy', fy);
+        dotEl.setAttribute('fill', color);
+
+        lineEl.setAttribute('points', fx + ',' + fy + ' ' + elbowX + ',' + cy + ' ' + cx + ',' + cy);
+        lineEl.setAttribute('stroke', color);
+        lineEl.style.filter = 'drop-shadow(0 0 6px ' + color + ')';
+
+        termEl.setAttribute('cx', cx);
+        termEl.setAttribute('cy', cy);
+        termEl.setAttribute('fill', color);
+        termEl.setAttribute('stroke', color);
+      }
+
+      // ---------- HIGH-PERFORMANCE RUN-LENGTH SPAN COMPRESSOR WITH FLOWER ATTRIBUTES ----------
       function gridToHtml(g) {
         var out = [];
         for (var r = 0; r < ROWS; r++) {
-          var row = g[r], line = '', curCls = null, buf = '';
+          var row = g[r], line = '', curCls = null, curFlower = null, buf = '';
           for (var c = 0; c < COLS; c++) {
             var cell = row[c];
             var ch = cell ? cell.ch : ' ';
             var cls = cell ? cell.cls : null;
+            var flower = cell ? cell.flower : null;
             if (cls !== curCls) {
-              line += curCls ? ('<span class="' + curCls + '">' + buf + '</span>') : buf;
-              buf = '';
+              if (buf) {
+                if (curCls) {
+                  var dataAttr = curFlower ? (' data-flower="' + curFlower + '"') : '';
+                  line += '<span class="' + curCls + '"' + dataAttr + '>' + buf + '</span>';
+                } else {
+                  line += buf;
+                }
+                buf = '';
+              }
               curCls = cls;
+              curFlower = flower;
             }
             buf += ch;
           }
-          line += curCls ? ('<span class="' + curCls + '">' + buf + '</span>') : buf;
+          if (buf) {
+            if (curCls) {
+              var dataAttr = curFlower ? (' data-flower="' + curFlower + '"') : '';
+              line += '<span class="' + curCls + '"' + dataAttr + '>' + buf + '</span>';
+            } else {
+              line += buf;
+            }
+          }
           out.push(line);
         }
         return out.join('\n');
       }
 
-      // ---------- RESPONSIVE FONT SCALING ----------
+      // ---------- RESPONSIVE FONT SCALING (LEAVES MARGINS FOR BIOLOGY CARDS) ----------
+      var currentFontSize = 14;
       function fit() {
-        var availW = window.innerWidth - 16;
-        var availH = (window.innerHeight - 16) * 0.95;
+        var winW = window.innerWidth, winH = window.innerHeight;
+        // Keep generous side margins on desktop for the biology diagram margin taxonomy cards
+        var sideMargin = (winW >= 960) ? 380 : ((winW >= 640) ? 140 : 20);
+        var availW = Math.min(winW - sideMargin, winW * 0.65);
+        var availH = (winH - 24) * 0.94;
         var fsW = availW / (COLS * 0.60);
         var fsH = availH / (ROWS * 0.98);
-        var fs = Math.max(2.2, Math.min(fsW, fsH, 20));
+        var fs = Math.max(2.2, Math.min(fsW, fsH, 18));
+        currentFontSize = fs;
         bloomEl.style.fontSize = fs + 'px';
       }
       window.addEventListener('resize', fit);
@@ -1256,8 +2086,6 @@
       // ---------- INTERACTION LISTENERS ----------
       function updatePointer(clientX, clientY) {
         var rect = anchorEl.getBoundingClientRect();
-        var originX = rect.left + rect.width / 2;
-        var originY = rect.bottom;
         var normX = (clientX - rect.left) / (rect.width || 1);
         var normY = (clientY - rect.top) / (rect.height || 1);
 
@@ -1267,23 +2095,124 @@
       }
 
       window.addEventListener('mousemove', function (e) { updatePointer(e.clientX, e.clientY); });
+      window.addEventListener('mouseleave', function () {
+        targetPointerCol = -9999;
+        targetPointerRow = -9999;
+        targetTilt = 0;
+      });
       window.addEventListener('touchmove', function (e) {
         if (e.touches && e.touches[0]) updatePointer(e.touches[0].clientX, e.touches[0].clientY);
       }, { passive: true });
 
-      function handleClick(clientX, clientY) {
+      // Triple-Tier Hit Resolver: 100% accurate, zero-latency detection anywhere on flower
+      function resolveFlowerHit(clientX, clientY, clickedEl) {
+        // 1. Direct character glyph inspection via DOM attributes and flower class
+        var el = clickedEl;
+        while (el && el !== anchorEl && el !== document.body) {
+          if (el.getAttribute) {
+            var df = el.getAttribute('data-flower');
+            if (df) return df;
+            var cls = (typeof el.className === 'string') ? el.className : (el.getAttribute('class') || '');
+            if (cls.indexOf('wp') !== -1 || cls.indexOf('peony') !== -1) return 'wp';
+            if (cls.indexOf('la') !== -1 || cls.indexOf('aster') !== -1) return 'la';
+            if (cls.indexOf('bp') !== -1 || cls.indexOf('rose') !== -1) return 'bp';
+            if (cls.indexOf('gb') !== -1 || cls.indexOf('buttercup') !== -1) return 'gb';
+            if (cls.indexOf('pb') !== -1 || cls.indexOf('plum') !== -1) return 'pb';
+            if (cls.indexOf('rb') !== -1 || cls.indexOf('wrap') !== -1) return 'rb';
+          }
+          el = el.parentElement;
+        }
+
+        // 2. Spatial Grid Hit Map lookup (catches spaces inside petals, rims, and character gaps)
+        var rect = anchorEl.getBoundingClientRect();
+        if (clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom) {
+          var col = Math.round(((clientX - rect.left) / (rect.width || 1)) * COLS);
+          var row = Math.round(((clientY - rect.top) / (rect.height || 1)) * ROWS);
+          if (row >= 0 && row < ROWS && col >= 0 && col < COLS) {
+            if (flowerHitGrid[row][col]) return flowerHitGrid[row][col];
+            // 5x5 neighborhood check around point
+            for (var d = 1; d <= 2; d++) {
+              for (var nr = row - d; nr <= row + d; nr++) {
+                if (nr < 0 || nr >= ROWS) continue;
+                for (var nc = col - d; nc <= col + d; nc++) {
+                  if (nc < 0 || nc >= COLS) continue;
+                  if (flowerHitGrid[nr][nc]) return flowerHitGrid[nr][nc];
+                }
+              }
+            }
+          }
+        }
+
+        // 3. Flower center proximity fallback
+        var cellW = (rect.width || (window.innerWidth * 0.7)) / COLS;
+        var targets = [
+          { id: 'wp', r: 36 * cellW },
+          { id: 'la', r: 30 * cellW },
+          { id: 'bp', r: 32 * cellW },
+          { id: 'gb', r: 26 * cellW },
+          { id: 'pb', r: 26 * cellW },
+          { id: 'rb', r: 30 * cellW }
+        ];
+        var bestId = null, bestDist = Infinity;
+        for (var i = 0; i < targets.length; i++) {
+          var mEl = document.getElementById('marker-' + targets[i].id);
+          if (mEl) {
+            var mRect = mEl.getBoundingClientRect();
+            var mx = mRect.left + mRect.width / 2;
+            var my = mRect.top + mRect.height / 2;
+            var d = Math.hypot(clientX - mx, (clientY - my) / 0.72);
+            if (d <= targets[i].r && d < bestDist) {
+              bestDist = d;
+              bestId = targets[i].id;
+            }
+          }
+        }
+        return bestId;
+      }
+
+      // ZERO-LATENCY INTERACTION HANDLER: Instant hit resolution & inspection toggle
+      function handleInteraction(clientX, clientY, clickedEl) {
         updatePointer(clientX, clientY);
         pulseStart = performance.now();
         pulseCol = targetPointerCol;
         pulseRow = targetPointerRow;
 
-        // Spawn burst of luminous pollen sparkles
-        spawnPollen(pulseCol, pulseRow, 22);
-      }
+        var hitId = resolveFlowerHit(clientX, clientY, clickedEl);
+        if (hitId) {
+          selectedSpecimenId = hitId;
+        } else {
+          // Clicked on empty dark sky: close inspection
+          selectedSpecimenId = null;
+        }
 
-      window.addEventListener('click', function (e) { handleClick(e.clientX, e.clientY); });
+        updateSpecimenUI(selectedSpecimenId);
+        syncLeaderLine();
+        spawnPollen(pulseCol, pulseRow, 24);
+      }
+      window.handleInteraction = handleInteraction;
+      window.handleClick = handleInteraction;
+      window.resolveFlowerHit = resolveFlowerHit;
+      window.flowerHitGrid = flowerHitGrid;
+      window.getSelectedSpecimenId = function () { return selectedSpecimenId; };
+
+      // Listen on pointerdown for 0ms immediate response (never cancelled by DOM replacement!)
+      window.addEventListener('pointerdown', function (e) {
+        if (e.target && e.target.closest && e.target.closest('.bio-card')) return;
+        handleInteraction(e.clientX, e.clientY, e.target);
+      });
+
+      // Click and touch fallbacks
+      window.addEventListener('click', function (e) {
+        if (e.target && e.target.closest && e.target.closest('.bio-card')) return;
+        handleInteraction(e.clientX, e.clientY, e.target);
+      });
+
       window.addEventListener('touchend', function (e) {
-        if (e.changedTouches && e.changedTouches[0]) handleClick(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+        if (e.target && e.target.closest && e.target.closest('.bio-card')) return;
+        if (e.changedTouches && e.changedTouches[0]) {
+          var t = e.changedTouches[0];
+          handleInteraction(t.clientX, t.clientY, document.elementFromPoint(t.clientX, t.clientY));
+        }
       }, { passive: true });
 
       requestAnimationFrame(render);
